@@ -1,0 +1,42 @@
+{
+  "name": "stock-data-visualizer",
+  "version": "1.0.0",
+  "engine": {
+    "node": "12.10.0"
+  },
+  "contributors": [
+    {
+      "name": "Brian Ha",
+      "email": "NEED EMAIL HERE"
+    },
+    {
+      "name": "Kruti Vyas",
+      "email": "NEED EMAIL HERE"
+    },
+    {
+      "name": "Zach Waite",
+      "email": "zach@waiteperspectives.com"
+    }
+  ],
+  "scripts": {
+    "build": "webpack",
+    "start": "webpack-dev-server --open 'Google Chrome'"
+  },
+  "private": true,
+  "devDependencies": {
+    "@babel/core": "^7.7.2",
+    "@babel/preset-env": "^7.7.1",
+    "babel-loader": "^8.0.6",
+    "css-loader": "^3.2.0",
+    "node-sass": "^4.13.0",
+    "sass-loader": "^8.0.0",
+    "style-loader": "^1.0.0",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.9.0"
+  },
+  "dependencies": {
+    "lit-html": "^1.1.2",
+    "sanitize-html": "^1.20.1"
+  }
+}

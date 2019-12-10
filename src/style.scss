@@ -1,0 +1,27 @@
+$brand-color: #4aa65e;
+
+html,
+body {
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: sans-serif;
+  background: radial-gradient(
+    circle,
+    lighten($brand-color, 20%) 0%,
+    $brand-color 100%
+  );
+  color: darken($brand-color, 30%);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+
+  > * {
+    margin: 0;
+  }
+}
