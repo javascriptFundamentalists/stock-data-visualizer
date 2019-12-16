@@ -85,3 +85,36 @@ const app = new AppComponent({name: 'World'}, 'root', [
 ]);
 
 ```
+
+### Communication between components
+
+Parent components can access directly the child widgets and their e.g. data and methods,
+but developers should not add the inverse relationship (child knows it's parent).
+Instead, custom events can be raised / listened to at the Component level.
+
+```javascript
+// use the triggerCustomEvent() method to notify listeners up the DOM
+// e.g. to notify that a new ticker symbol has been selected
+tickerInputChanged(e) {
+  const ticker = e.currentTarget.value;
+  this.triggerCustomEvent('update-ticker', {tickerSymbol: ticker});
+}
+
+// use the events() method on a listening component to register event listeners
+
+events () {
+  return [
+    {type: 'update-ticker', selector: this.parentId, handler: this.updatePlot},
+  ]
+}
+
+async updatePlot (e) {
+  const ticker = e.detail.tickerSymbol;
+  const data = await axios.get(this.apiEndpoint);
+  const filteredData = data.filter(record => record.tradeDate >= this.startDate);
+  this.update(filteredData);
+}
+
+```
+
+
