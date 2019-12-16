@@ -15,18 +15,19 @@ export class AppComponent extends Component {
           <a class="appbar-link" href="#">App Bar</a>
         </div>
       </nav>
-      <div id="sidebar" class="sidebar sidebar-primary" />
-      <div id="content" />
+      <div id="sidebar" class="sidebar sidebar-primary"></div>
+      <div id="content" ></div>
     `;
   }
 
   events () {
     return [
-      {type: 'name-change', selector: '#root', handler: (e) => this.updateUser(e)}
+      {type: 'name-change', selector: '#root', handler: this.updateUser}
     ]
   }
 
   async updateUser (e) {
+    console.log(e);
     const rid = e.detail.id;
     const userData = await this.fetchUserData(rid);
     this.update({name: userData.data.data.first_name});

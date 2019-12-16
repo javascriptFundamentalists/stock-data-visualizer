@@ -17,11 +17,12 @@ export class SideBarComponent extends Component {
 
   events () {
     return [
-      {type: 'click', selector: 'a', handler: (e) => this.triggerNameChange(e)},
+      {type: 'click', selector: 'a', handler: this.triggerNameChange},
     ]
   }
 
   triggerNameChange(e) {
+    console.log('triggering');
     e.preventDefault();
     const num = Math.floor(Math.random() * 10);
     const nameChangeEvent = new CustomEvent('name-change', {

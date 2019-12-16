@@ -63,6 +63,9 @@ export class Component {
     this.attachMany(children);
   }
 
+  // TODO: method to destroy a Component gracefully
+  destroy () {}
+
   /**
    * Add a subcomponent
    */
@@ -75,6 +78,9 @@ export class Component {
       child.registerEvents();
     }
   }
+
+  // TODO: method to remove a child
+  detach (child) {}
 
   /**
    * Add multiple subcomponents
@@ -102,13 +108,17 @@ export class Component {
     });
   }
 
+  // TODO: method to unbind events
+  unregisterEvents () {}
+
   /**
    * Fill template and inject html into the DOM at the parentId node
    */
   render (data, parentId) {
     if ( parentId ) {
-      const el = document.getElementById(parentId);
-      render(this.template(data), el);
+      const parent = document.getElementById(parentId);
+      render(this.template(data), parent);
+
       this.children.forEach(child => child.render(data, child.parentId));
     }
   }
@@ -118,6 +128,21 @@ export class Component {
    */
   update ( data ) {
     this.store.update(data);
+  }
+
+  /**
+   * Utility method to bubble a custom event up the tree to be handled,
+   * potentially by the root app widget
+   *
+   *
+   */
+  triggerCustomEvent (name, detail) {
+    const evt = new CustomEvent(name, {
+      bubbles: true,
+      detail: detail,
+    })
+    const el = document.getElementById(this.parentId);
+    el.dispatchEvent(evt);
   }
 
   /**

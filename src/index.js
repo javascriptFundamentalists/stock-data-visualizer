@@ -8,8 +8,7 @@ import { AppComponent } from "./App";
 import { ContentComponent } from "./Content";
 import { SideBarComponent } from "./Sidebar";
 
-const app = new AppComponent({name: 'World'}, 'root', []);
-const content = new ContentComponent({}, 'content', []);
-//  [new ContentComponent({}, null), 'content'],
-//  [new SideBarComponent({}, null), 'sidebar'],
-//]);
+const app = new AppComponent({name: 'World'}, 'root', [
+  [new SideBarComponent({}, null), 'sidebar'],
+  [new ContentComponent({}, null), 'content'],
+]);
