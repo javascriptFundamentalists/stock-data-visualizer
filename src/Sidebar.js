@@ -7,9 +7,8 @@ export class SideBarComponent extends Component {
     return html`
       <div class="sidebar-section">
         <ul id="sidebar-list-1">
-          <li><a class=".click-item" href="#">Item 1</a>
-          <li><a class=".click-item" href="#">Item 2</a>
-          <li><a class=".click-item" href="#">Item 3</a>
+          <li><a id="data-1" href="#">Dataset 1</a>
+          <li><a id="data-2" href="#">Dataset 2</a>
         </ul>
       </div>
     `;
@@ -17,20 +16,14 @@ export class SideBarComponent extends Component {
 
   events () {
     return [
-      {type: 'click', selector: 'a', handler: this.triggerNameChange},
+      {type: 'click', selector: 'a', handler: this.triggerDataChange},
     ]
   }
 
-  triggerNameChange(e) {
-    console.log('triggering');
+  triggerDataChange(e) {
     e.preventDefault();
-    const num = Math.floor(Math.random() * 10);
-    const nameChangeEvent = new CustomEvent('name-change', {
-      bubbles: true,
-      detail: {id: num}
-    });
-    const el = document.getElementById(this.parentId);
-    el.dispatchEvent(nameChangeEvent);
+    const ds = e.target.id;
+    this.triggerCustomEvent('data-change', {dataSet: ds})
   }
 
 }

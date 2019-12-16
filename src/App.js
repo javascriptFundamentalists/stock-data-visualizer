@@ -22,24 +22,32 @@ export class AppComponent extends Component {
 
   events () {
     return [
-      {type: 'name-change', selector: '#root', handler: this.updateUser}
+      {type: 'data-change', selector: '#root', handler: this.updateData}
     ]
   }
 
-  async updateUser (e) {
-    console.log(e);
-    const rid = e.detail.id;
-    const userData = await this.fetchUserData(rid);
-    this.update({name: userData.data.data.first_name});
+  updateData(e) {
+    const newDataSet = e.detail.dataSet;
+    this.update({dataSet: newDataSet});
   }
 
-  async fetchUserData (id) {
-    try {
-      const response = await axios.get(`https://reqres.in/api/users/${id}`);
-      return response;
-    } catch (error) {
-      console.error(error);
-    }
-  }
+  // Old methods from hello world testing
+  //
+  //These could be used as templates for real methods so don't erase yet.
+  //
+  //async updateUser (e) {
+  //  const rid = e.detail.id;
+  //  const userData = await this.fetchUserData(rid);
+  //  this.update({name: userData.data.data.first_name});
+  //}
+
+  //async fetchUserData (id) {
+  //  try {
+  //    const response = await axios.get(`https://reqres.in/api/users/${id}`);
+  //    return response;
+  //  } catch (error) {
+  //    console.error(error);
+  //  }
+  //}
 }
 

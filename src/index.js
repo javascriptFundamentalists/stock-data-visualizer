@@ -5,10 +5,10 @@ import "regenerator-runtime/runtime";
 
 import "./style.scss";
 import { AppComponent } from "./App";
-import { ContentComponent } from "./Content";
+import { D3Component } from "./D3Component";
 import { SideBarComponent } from "./Sidebar";
 
 const app = new AppComponent({name: 'World'}, 'root', [
-  [new SideBarComponent({}, null), 'sidebar'],
-  [new ContentComponent({}, null), 'content'],
+  [new SideBarComponent({}, null, []), 'sidebar'],
+  [new D3Component({}, null, []), 'content'],
 ]);
