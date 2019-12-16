@@ -1,6 +1,12 @@
 import { html, render } from 'lit-html';
 
 
+/**
+ * A simple data store.
+ *
+ * The store is an Observer, listening for changes to its data.
+ * On change, it will notify subscribers.
+ */
 export class Store {
   constructor () {
     this.listeners = new Set([]);
@@ -21,6 +27,9 @@ export class Store {
     });
   }
 
+  /**
+   * Conditionally update the data in state and notify subscribers.
+   */
   update ( data ) {
     if ( !this.deepEqual(data, this.data) ) {
       this.data = data;
@@ -28,14 +37,23 @@ export class Store {
     }
   }
 
+  /**
+   * TODO: complete the deepEquals method
+   *
+   * Compare to objects for equality.
+   */
   deepEqual (obj1, obj2) {
     return false;
   }
 }
 
+/**
+ * Base class for visual components.
+ *
+ */
 export class Component {
   constructor (data, parentId, children=[]) {
-    this.children = children;
+    this.children = [];
     this.parentId = parentId;
     this.store = new Store();
     this.store.subscribe(() => {this.render(this.store.data, this.parentId)})
@@ -45,6 +63,9 @@ export class Component {
     this.attachMany(children);
   }
 
+  /**
+   * Add a subcomponent
+   */
   attach (child, parentId) {
     if ( parentId ) {
       child.parentId = parentId;
@@ -55,12 +76,20 @@ export class Component {
     }
   }
 
+  /**
+   * Add multiple subcomponents
+   * 
+   * @param chilren (Array): Array of [Component, parentId] tuples
+   */
   attachMany (children) {
     children.forEach(cp => {
       this.attach(cp[0], cp[1]);
     });
   }
 
+  /**
+   * Add event listeners for standard and custom events
+   */
   registerEvents () {
     this.events().forEach(e => {
       const el = document.querySelector(e.selector);
@@ -71,6 +100,9 @@ export class Component {
     });
   }
 
+  /**
+   * Fill template and inject html into the DOM at the parentId node
+   */
   render (data, parentId) {
     if ( parentId ) {
       const el = document.getElementById(parentId);
@@ -79,15 +111,33 @@ export class Component {
     }
   }
 
+  /**
+   * Accessor method for this.store.update
+   */
   update ( data ) {
     this.store.update(data);
   }
 
-  // should be overridden
+  /**
+   * This is a hook-like method to add event listeners. This is called
+   * during the constructor, and each object returned will be used to
+   * create a listener.
+   *
+   * e.g. 
+   * events () {
+   *   return [
+   *     {type: 'click', selector: '#button1', handler: (e) => this.clickHandler(e)},
+   *     {type: 'change', selector: '#input1', handler: (e) => this.inputHandler(e)},
+   *   ]
+   * }
+   */
   events () {
     return [];
   }
 
+  /**
+   * This is where the html structure is defined, using lit-html templates.
+   */
   template (data) {
     return html`<div>OVERRIDE ME</div>`;
   }

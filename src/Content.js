@@ -16,13 +16,14 @@ export class ContentComponent extends Component {
   ]}
 
   async updateUser () {
-    const userData = await this.fetchUserData(2);
+    const rid = Math.floor(Math.random() * 10)
+    const userData = await this.fetchUserData(rid);
     this.update({name: userData.data.data.first_name});
   }
 
   async fetchUserData (id) {
     try {
-      const response = await axios.get(`https://reqres.in/api/users/2`);
+      const response = await axios.get(`https://reqres.in/api/users/${id}`);
       return response;
     } catch (error) {
       console.error(error);

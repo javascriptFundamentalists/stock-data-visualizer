@@ -7,6 +7,6 @@ import "./style.scss";
 import { AppComponent } from "./App";
 import { ContentComponent } from "./Content";
 
-const app = new AppComponent({name: 'World'}, 'root', []);
-const content = new ContentComponent({}, null);
-app.attach(content, 'content');
+const app = new AppComponent({name: 'World'}, 'root', [
+  [new ContentComponent({}, null), 'content']
+]);
