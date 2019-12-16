@@ -1,6 +1,12 @@
 // Including other files with ES6 modules
-import "./style.scss";
-import { App } from "./App";
+//
+import "core-js/stable";
+import "regenerator-runtime/runtime";
 
-const app = App('root');
-app.mount();
+import "./style.scss";
+import { AppComponent } from "./App";
+import { ContentComponent } from "./Content";
+
+const app = new AppComponent({name: 'World'}, 'root', []);
+const content = new ContentComponent({}, null);
+app.attach(content, 'content');

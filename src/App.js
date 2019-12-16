@@ -1,28 +1,23 @@
-import { html, render } from 'lit-html';
+import { html } from 'lit-html';
+import { Component } from './Component';
 
-export const App = (parentId) => {
 
-  const data = {
-    parentId: parentId,
-  }
-
-  // the html template
-  const template = () => {
-    return (html`
-      <div id="app">
-        <h1>Hello World</h1>
+export class AppComponent extends Component {
+  template (data) {
+    return html`
+      <nav class="appbar appbar-primary">
+        <div class="padded">
+          <a class="appbar-link" href="#">App Bar</a>
+        </div>
+      </nav>
+      <div class="sidebar sidebar-primary">
+        <div class="sidebar-section">
+          <ul id="sidebar-list-1"/>
+        </div>
       </div>
-    `);
-  }
-
-  // helper to attach this to a parent element
-  const mount = () => {
-    parent = document.getElementById(data.parentId);
-    render(template(), parent);
-  }
-
-  return {
-    mount: mount,
+      <div id="content">
+      </div>
+    `;
   }
 }
 
