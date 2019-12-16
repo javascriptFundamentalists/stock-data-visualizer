@@ -6,7 +6,10 @@ import "regenerator-runtime/runtime";
 import "./style.scss";
 import { AppComponent } from "./App";
 import { ContentComponent } from "./Content";
+import { SideBarComponent } from "./Sidebar";
 
-const app = new AppComponent({name: 'World'}, 'root', [
-  [new ContentComponent({}, null), 'content']
-]);
+const app = new AppComponent({name: 'World'}, 'root', []);
+const content = new ContentComponent({}, 'content', []);
+//  [new ContentComponent({}, null), 'content'],
+//  [new SideBarComponent({}, null), 'sidebar'],
+//]);

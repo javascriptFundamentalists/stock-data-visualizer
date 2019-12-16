@@ -92,10 +92,12 @@ export class Component {
    */
   registerEvents () {
     this.events().forEach(e => {
-      const el = document.querySelector(e.selector);
-      if ( el ) {
-        const handler = e.handler.bind(this);
-        el.addEventListener(e.type, handler, false);
+      const elements = document.querySelectorAll(e.selector);
+      if ( elements ) {
+        elements.forEach(el => {
+          const handler = e.handler.bind(this);
+          el.addEventListener(e.type, handler, false);
+        });
       }
     });
   }
