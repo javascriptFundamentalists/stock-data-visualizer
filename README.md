@@ -70,7 +70,7 @@ The Component constructor takes:
 - parentId (str): A string id of the DOM element to attach to. This can be null or otherwise falsey if attaching to a parent using the `children=[...]` argument.
 - children (Array): An array of [Component, parentId] pairs. The parentId supplied here will prevail over an existing parentId on the Component instance.
 
-````javascript
+```javascript
 import "core-js/stable";
 import "regenerator-runtime/runtime";
 
