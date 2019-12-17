@@ -7,8 +7,15 @@ export class SideBarComponent extends Component {
     return html`
       <div class="sidebar-section">
         <ul id="sidebar-list-1">
-          <li><a id="data-1" href="#">Dataset 1</a>
-          <li><a id="data-2" href="#">Dataset 2</a>
+          <li><a id="AAPL" href="#">Apple</a>
+          <li><a id="C" href="#">Citigroup</a>
+          <li class="padded">
+            <select id="tickerInput" class="form-control">
+              ${data.tickers.map(t => html`
+                <option value="${t.key}">${t.name}</option>
+                `)};
+            </select>
+          </li>
         </ul>
       </div>
     `;
@@ -17,12 +24,13 @@ export class SideBarComponent extends Component {
   events () {
     return [
       {type: 'click', selector: 'a', handler: this.triggerDataChange},
+      {type: 'change', selector: '#tickerInput', handler: this.triggerDataChange},
     ]
   }
 
   triggerDataChange(e) {
     e.preventDefault();
-    const ds = e.target.id;
+    const ds = e.target.value;
     this.triggerCustomEvent('data-change', {dataSet: ds})
   }
 

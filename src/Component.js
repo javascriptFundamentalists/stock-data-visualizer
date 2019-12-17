@@ -32,7 +32,7 @@ export class Store {
    */
   update ( data ) {
     if ( !this.deepEqual(data, this.data) ) {
-      this.data = data;
+      Object.assign(this.data, data);
       this.notify();
     }
   }

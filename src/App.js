@@ -12,7 +12,7 @@ export class AppComponent extends Component {
     return html`
       <nav class="appbar appbar-primary">
         <div class="padded">
-          <a class="appbar-link" href="#">App Bar</a>
+          <a class="appbar-link" href="#">Stock Visuals</a>
         </div>
       </nav>
       <div id="sidebar" class="sidebar sidebar-primary"></div>
@@ -22,7 +22,7 @@ export class AppComponent extends Component {
 
   events () {
     return [
-      {type: 'data-change', selector: '#root', handler: this.updateData}
+      {type: 'data-change', selector: '#root', handler: this.updateData},
     ]
   }
 
