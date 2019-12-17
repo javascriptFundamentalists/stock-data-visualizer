@@ -7,10 +7,9 @@ export class SideBarComponent extends Component {
     return html`
       <div class="sidebar-section">
         <ul id="sidebar-list-1">
-          <li><a id="AAPL" href="#">Apple</a>
-          <li><a id="C" href="#">Citigroup</a>
           <li class="padded">
-            <select id="tickerInput" class="form-control">
+            <label for="tickerInput">Ticker Symbol</Label>
+            <select id="tickerInput" name="tickerInput" class="form-control">
               ${data.tickers.map(t => html`
                 <option value="${t.key}">${t.name}</option>
                 `)};
