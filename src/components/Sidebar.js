@@ -1,7 +1,6 @@
 import { html } from 'lit-html';
 import { Component } from './Component';
 
-
 export class SideBarComponent extends Component {
   template (data) {
     return html`
