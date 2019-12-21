@@ -1,14 +1,14 @@
-import { html } from 'lit-html';
-import { Component } from './Component';
-import axios from 'axios';
-
+import { html } from "lit-html";
+import axios from "axios";
+import { getBATSData } from "../quandl/quandl";
+import { Component } from "./Component";
 
 /**
  * The app component is the global source of data. It handles all of the i/o
  * operations and passes data down to it's children to be rendered.
  */
 export class AppComponent extends Component {
-  template (data) {
+  template(data) {
     return html`
       <nav class="appbar appbar-primary">
         <div class="padded">
@@ -16,19 +16,23 @@ export class AppComponent extends Component {
         </div>
       </nav>
       <div id="sidebar" class="sidebar sidebar-primary"></div>
-      <div id="content" ></div>
+      <div id="content"></div>
     `;
   }
 
-  events () {
+  events() {
     return [
-      {type: 'data-change', selector: '#root', handler: this.updateData},
-    ]
+      { type: "data-change", selector: "#root", handler: this.updateData }
+    ];
   }
 
   updateData(e) {
-    const newDataSet = e.detail.dataSet;
-    this.update({dataSet: newDataSet});
+    const tickerSymbol = e.detail.tickerSymbol;
+
+    const dataPromise = getBATSData(tickerSymbol);
+    dataPromise.then(data => {
+      this.update({ dataSet: tickerSymbol, batsData: data.data });
+    });
   }
 
   // Old methods from hello world testing
@@ -50,4 +54,3 @@ export class AppComponent extends Component {
   //  }
   //}
 }
-

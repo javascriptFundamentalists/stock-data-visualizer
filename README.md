@@ -3,7 +3,7 @@ Stock Data Visualizer
 
 ## Intro
 
-![screenshot]( screenshot.png )
+![screenshot]( screenshot.gif)
 
 TODO: Summary of app
 
