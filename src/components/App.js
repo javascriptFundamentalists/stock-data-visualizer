@@ -1,6 +1,6 @@
 import { html } from "lit-html";
 import axios from "axios";
-import { getBATSData } from "../quandl/quandl";
+import { getBATSData, getCHRISData } from "../quandl/quandl";
 import { Component } from "./Component";
 
 /**
@@ -29,28 +29,12 @@ export class AppComponent extends Component {
   updateData(e) {
     const tickerSymbol = e.detail.tickerSymbol;
 
-    const dataPromise = getBATSData(tickerSymbol);
+    //const dataPromise = getBATSData(tickerSymbol);
+    const dataPromise = getCHRISData(tickerSymbol);
+    const newData = { dataSet: tickerSymbol, batsData: false, chrisData: false };
     dataPromise.then(data => {
-      this.update({ dataSet: tickerSymbol, batsData: data.data });
+      newData.chrisData = data.data;
+      this.update(newData);
     });
   }
-
-  // Old methods from hello world testing
-  //
-  //These could be used as templates for real methods so don't erase yet.
-  //
-  //async updateUser (e) {
-  //  const rid = e.detail.id;
-  //  const userData = await this.fetchUserData(rid);
-  //  this.update({name: userData.data.data.first_name});
-  //}
-
-  //async fetchUserData (id) {
-  //  try {
-  //    const response = await axios.get(`https://reqres.in/api/users/${id}`);
-  //    return response;
-  //  } catch (error) {
-  //    console.error(error);
-  //  }
-  //}
 }
