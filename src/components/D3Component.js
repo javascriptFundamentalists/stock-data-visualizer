@@ -18,7 +18,7 @@ export class D3Component extends Component {
       case "AAPL":
         data.plotData = d3.csvParse(`date,close\n1-May-12,58.13\n30-Apr-12,53.98\n27-Apr-12,67.00`);
         break;
-      case "C":
+      case "BATS_AAC":
         data.plotData = d3.csvParse(`date,close\n26-Apr-12,89.70\n5-Apr-12,99.00\n24-Apr-12,130.28\n23-Apr-12,166.70\n20-Apr-12,234.98`);
         break;
       default:
