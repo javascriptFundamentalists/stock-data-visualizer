@@ -13,13 +13,31 @@ export class D3Component extends Component {
     super.render(data, parentId);
 
     if ( data.dataSet ) {
-        const rawDataArray = data.batsData.dataset.data;
-        const parsedDataArray = rawDataArray.map(row => {
-          return { date: row[0], close: row[1] };
-        });
-        data.plotData = parsedDataArray;
-        this.clearPlot("#plot");
-        this.renderPlot(data.plotData, "#plot");
+
+        // for BATS data
+        if ( data.batsData ) {
+          console.log('using BATS data');
+          const rawDataArray = data.batsData.dataset.data;
+          const parsedDataArray = rawDataArray.map(row => {
+            return { date: row[0], close: row[1] };
+          });
+          data.plotData = parsedDataArray;
+          this.clearPlot("#plot");
+          this.renderPlot(data.plotData, "#plot");
+        }
+
+        // for CHRIS data
+        if ( data.chrisData ) {
+          console.log('using CHRIS data');
+          const rawDataArray = data.chrisData.dataset.data;
+          const parsedDataArray = rawDataArray.map(row => {
+            return { date: row[0], close: row[5] };
+          });
+          data.plotData = parsedDataArray;
+          this.clearPlot("#plot");
+          this.renderPlot(data.plotData, "#plot");
+        }
+
     }
 
   }

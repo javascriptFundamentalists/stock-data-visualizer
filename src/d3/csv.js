@@ -7,3 +7,11 @@ export const readBATSmetadata = (filepath) => {
   // data is assumed to be in public folder next to index.html
   return d3.csv('./data/BATS_metadata.csv');
 }
+
+/**
+ * Return a promise of CHRIS data
+ */
+export const readCHRISmetadata = (filepath) => {
+  // data is assumed to be in public folder next to index.html
+  return d3.csv('./data/continuous.csv');
+}
