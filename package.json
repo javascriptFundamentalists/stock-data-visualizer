@@ -20,7 +20,7 @@
   ],
   "scripts": {
     "build": "webpack",
-    "start": "webpack-dev-server --open 'Google Chrome'"
+    "start": "webpack-dev-server"
   },
   "private": true,
   "devDependencies": {
