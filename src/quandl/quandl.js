@@ -1,25 +1,26 @@
-import axios from 'axios';
+import axios from "axios";
+import * as config from '../../config.json';
 
-// Zach Example: continuous data
-export async const getContinuosData = (API_KEY, endpoint, exchange, code, number) => {
-  const endpoint = `https://www.quandl.com/api/v3/datasets/${endpoint}/${exchange}_${code}${number}.json?api_key=${API_KEY}`
-  try {
-    const data = await axios.get(endpoint);
-    return data;
-  } catch ( err ) {
-    console.error(err);
-  }
-}
+const API_KEY = config.default.QUANDL_API_KEY;
 
-// TODO: get BATS data
 /**
- * Get data from BATS API. BATS has a free dataset for stock exchange data.
+ * Get data from BATS API.
  *
  * Documentation: https://www.quandl.com/data/BATS-BATS-U-S-Stock-Exchanges
  *
  */
-export async const getBATSData = () => {
+export const getBATSData = (code) => {
+  const url = `https://www.quandl.com/api/v3/datasets/BATS/${code}.json?api_key=${API_KEY}`;
+  const dataPromise = axios.get(url);
+  return dataPromise;
+};
 
-  return data;
+/**
+ * Get data from continuous futures API.
+ *
+ * Documentation: https://www.quandl.com/data/CHRIS-Wiki-Continuous-Futures
+ *
+ */
+export const getCHRISData = (code) => {
+  // TODO: Brian complete this API call
 }
-
