@@ -9,6 +9,15 @@ TODO: Summary of app
 
 ## Setup
 
+1. Get an API key from quandl
+2. Create a config.json file in the project root e.g.
+
+```
+{
+  "QUANDL_API_KEY": "jsdkfsjl"
+}
+```
+
 To run the app locally:
 
 1. Clone this repo: `git clone https://github.com/javascriptFundamentalists/stock-data-visualizer`

@@ -22,7 +22,7 @@ let counter = 0;
     // For BATS data
     // codes.push({ key: data[counter].code, name: data[counter].code });
     // For CHRIS data
-    const symbol = `${data[counter].Exchange}_${data[counter].Ticker}`;
+    const symbol = `${data[counter].Exchange}_${data[counter].Ticker}1`;
     codes.push({ key: symbol, name: symbol });
     counter++;
   }
