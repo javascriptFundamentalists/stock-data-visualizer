@@ -15,6 +15,12 @@ import { readCHRISmetadata } from "./d3/csv";
 const limit = 15;
 let counter = 0;
 
+// available data sources
+const sources = [
+  {key: 'bats', name: 'BATS Exchange Equities'},
+  {key: 'chris', name: 'Continuous Futures'}
+];
+
 (async () => {
   const data = await readCHRISmetadata();
   const codes = [];
@@ -27,7 +33,7 @@ let counter = 0;
     counter++;
   }
 
-  const app = new AppComponent({ tickers: codes }, "root", [
+  const app = new AppComponent({ tickers: codes, sources: sources }, "root", [
     [new SideBarComponent({}, null, []), "sidebar"],
     [new D3Component({}, null, []), "content"]
   ]);

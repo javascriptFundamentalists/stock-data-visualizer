@@ -25,8 +25,28 @@ ul {
   list-style-type: none;
 }
 
-.padded {
+// padding scaling
+// TODO: use SASS loop to generate incremental classes
+.p15 {
   padding: 1.5rem;
+}
+
+.p14 {
+  padding: 1.4rem;
+}
+.p13 {
+  padding: 1.3rem;
+}
+
+.p12 {
+  padding: 1.2rem;
+}
+.p10 {
+  padding: 1rem;
+}
+
+.p0 {
+  padding: none;
 }
 
 .appbar {
@@ -61,6 +81,7 @@ ul {
 
   ul {
     padding-left: 0;
+    text-align: left;
   }
 }
 
@@ -96,4 +117,8 @@ path {
   stroke: grey;
   stroke-width: 1;
   shape-rendering: crispEdges;
+}
+
+.hidden {
+  display: none !important;
 }

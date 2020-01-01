@@ -22,8 +22,14 @@ export class AppComponent extends Component {
 
   events() {
     return [
-      { type: "data-change", selector: "#root", handler: this.updateData }
+      { type: "data-change", selector: "#root", handler: this.updateData },
+      { type: "data-source-change", selector: "#root", handler: this.loadTickers }
     ];
+  }
+
+  loadTickers(e) {
+    console.log(e.detail);
+    // load ticker data, then show
   }
 
   updateData(e) {
