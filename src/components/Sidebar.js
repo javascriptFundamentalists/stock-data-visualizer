@@ -6,7 +6,18 @@ export class SideBarComponent extends Component {
     return html`
       <div class="sidebar-section">
         <ul id="sidebar-list-1">
-          <li class="padded">
+          <li class="p10">
+            <label for="dataSourceInput">Data Source</label>
+            <select id="dataSourceInput" name="dataSourceInput" class="form-control">
+              <option value="">-- Select a Data Source --</option>
+              ${data.sources.map(
+                s => html`
+                  <option value="${s.key}">${s.name}</option>
+                `
+              )};
+            </select>
+          </li>
+          <li id="tickerInputItem" class="p10 hidden">
             <label for="tickerInput">Ticker Symbol</label>
             <select id="tickerInput" name="tickerInput" class="form-control">
               <option value="">-- Pick a Symbol --</option>
@@ -24,16 +35,25 @@ export class SideBarComponent extends Component {
 
   events() {
     return [
-      { type: "click", selector: "a", handler: this.triggerDataChange },
-      {
-        type: "change",
-        selector: "#tickerInput",
-        handler: this.triggerDataChange
-      }
+      {type: "click", selector: "a", handler: this.triggerDataChange},
+      {type: "change", selector: "#tickerInput", handler: this.triggerDataChange},
+      {type: "change", selector: "#dataSourceInput", handler: this.triggerDataSourceChange},
     ];
   }
 
+  showTickerInput() {
+    const tickerInput = document.getElementById('tickerInputItem');
+    tickerInput.classList.remove('hidden');
+  }
+
+  triggerDataSourceChange(e) {
+    const source = e.target.value;
+    this.triggerCustomEvent("data-source-change", {dataSource: source});
+    this.showTickerInput()
+  }
+
   triggerDataChange(e) {
+    // need to preventDefault here or clicking <a> will navigate
     e.preventDefault();
     const ticker = e.target.value;
     this.triggerCustomEvent("data-change", { tickerSymbol: ticker });
