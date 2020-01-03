@@ -1,6 +1,7 @@
 import { html } from "lit-html";
 import axios from "axios";
 import { getBATSData, getCHRISData } from "../quandl/quandl";
+import { readBATSmetadata, readCHRISmetadata } from "../d3/csv";
 import { Component } from "./Component";
 
 /**
@@ -28,19 +29,48 @@ export class AppComponent extends Component {
   }
 
   loadTickers(e) {
-    console.log(e.detail);
     // load ticker data, then show
+    let codes = [];
+    if ( e.detail.dataSource === 'bats' ) {
+      readBATSmetadata().then(data => {
+        codes = data.map(datum => {
+          return {key: datum.code, name: datum.code}
+        });
+        // limit to first 100 results for now due to slow dropdown
+        codes = codes.filter((x, ndx) => { return ndx < 100});
+        const newData = {tickers: codes, dataSource: 'bats', batsData: false, chrisData: false};
+        this.update(newData);
+      });
+    } else {
+      readCHRISmetadata().then(data => {
+        codes = data.map(datum => {
+          const symbol = `${datum.Exchange}_${datum.Ticker}1`;
+          return {key: symbol, name: symbol}
+        });
+        // limit to first 100 results for now due to slow dropdown
+        codes = codes.filter((x, ndx) => { return ndx < 100});
+        const newData = {tickers: codes, dataSource: 'chris', batsData: false, chrisData: false};
+        this.update(newData);
+      });
+    }
   }
 
   updateData(e) {
     const tickerSymbol = e.detail.tickerSymbol;
 
-    //const dataPromise = getBATSData(tickerSymbol);
-    const dataPromise = getCHRISData(tickerSymbol);
     const newData = { dataSet: tickerSymbol, batsData: false, chrisData: false };
-    dataPromise.then(data => {
-      newData.chrisData = data.data;
-      this.update(newData);
-    });
+    if ( this.store.data.dataSource === 'bats' ) {
+      const dataPromise = getBATSData(tickerSymbol);
+      dataPromise.then(data => {
+        newData.batsData = data.data;
+        this.update(newData);
+      });
+    } else {
+      const dataPromise = getCHRISData(tickerSymbol);
+      dataPromise.then(data => {
+        newData.chrisData = data.data;
+        this.update(newData);
+      });
+    }
   }
 }
