@@ -27,26 +27,19 @@ ul {
 
 // padding scaling
 // TODO: use SASS loop to generate incremental classes
-.p15 {
-  padding: 1.5rem;
-}
+$paddings: (
+  p0: none,
+  p1: 1rem,
+  p2: 1.2rem,
+  p3: 1.3rem,
+  p4: 1.4rem,
+  p5: 1.5rem
+);
 
-.p14 {
-  padding: 1.4rem;
-}
-.p13 {
-  padding: 1.3rem;
-}
-
-.p12 {
-  padding: 1.2rem;
-}
-.p10 {
-  padding: 1rem;
-}
-
-.p0 {
-  padding: none;
+@each $element, $size in $paddings {
+  #{$element} {
+    padding: $size;
+  }
 }
 
 .appbar {
