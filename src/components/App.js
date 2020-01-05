@@ -35,12 +35,15 @@ export class AppComponent extends Component {
   updateData(e) {
     const tickerSymbol = e.detail.tickerSymbol;
 
-    //const dataPromise = getBATSData(tickerSymbol);
+    // const anotherDataPromise = getBATSData(tickerSymbol);
     const dataPromise = getCHRISData(tickerSymbol);
     const newData = { dataSet: tickerSymbol, batsData: false, chrisData: false };
     dataPromise.then(data => {
       newData.chrisData = data.data;
       this.update(newData);
     });
+    /*anotherDataPromise.then(data => {
+      newData.batsData = data.data;
+    });*/
   }
 }
