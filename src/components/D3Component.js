@@ -58,9 +58,9 @@ export class D3Component extends Component {
     let csvdata = data;
 
     // Set the dimensions of the canvas / graph
-    let margin = { top: 30, right: 20, bottom: 30, left: 50 },
-      width = 600 - margin.left - margin.right,
-      height = 270 - margin.top - margin.bottom;
+    let margin = { top: 30, right: 30, bottom: 30, left: 30 },
+      width = 800 - margin.left - margin.right,
+      height = 500 - margin.top - margin.bottom;
 
     // Set the ranges
     let x = d3.scaleTime().range([0, width]);
