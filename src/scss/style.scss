@@ -1,4 +1,5 @@
 $appbar-height: 18vh;
+$sidebar-width: 15vw;
 $color-alpha-primary: slategrey;
 $color-beta-primary: white;
 
@@ -26,20 +27,25 @@ ul {
 }
 
 // padding scaling
-// TODO: use SASS loop to generate incremental classes
 $paddings: (
-  p0: none,
-  p1: 1rem,
-  p2: 1.2rem,
-  p3: 1.3rem,
-  p4: 1.4rem,
-  p5: 1.5rem
+  0: none,
+  1: 0.2rem,
+  2: 0.4rem,
+  3: 0.8rem,
+  4: 1.6rem,
+  5: 3.2rem
 );
 
-@each $element, $size in $paddings {
-  #{$element} {
-    padding: $size;
+@mixin padding-modifiers {
+  @each $scale, $size in $paddings {
+    &-#{$scale} {
+      padding: $size;
+    }
   }
+}
+
+.p {
+  @include padding-modifiers;
 }
 
 .appbar {
@@ -68,7 +74,7 @@ $paddings: (
   position: fixed;
   top: 0;
   left: 0;
-  min-width: 15vw;
+  width: $sidebar-width;
   height: 100vh;
   margin-top: $appbar-height;
 
@@ -86,6 +92,22 @@ $paddings: (
     font-size: 1.5rem;
     text-decoration: none;
   }
+}
+
+.content {
+  position: fixed;
+  top: 0;
+  left: 0;
+  margin-top: $appbar-height;
+  margin-left: $sidebar-width;
+  height: 100vh - $appbar-height;
+  width: 100vw - $sidebar-width;
+}
+
+.plot {
+  width: 100%;
+  height: 100%;
+  padding-top: 3rem;
 }
 
 #hello {

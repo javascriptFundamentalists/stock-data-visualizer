@@ -6,7 +6,7 @@ export class SideBarComponent extends Component {
     return html`
       <div class="sidebar-section">
         <ul id="sidebar-list-1">
-          <li class="p10">
+          <li class="p-3">
             <label for="dataSourceInput">Data Source</label>
             <select id="dataSourceInput" name="dataSourceInput" class="form-control">
               <option value="">-- Select a Data Source --</option>
@@ -17,7 +17,7 @@ export class SideBarComponent extends Component {
               )};
             </select>
           </li>
-          <li id="tickerInputItem" class="p10 hidden">
+          <li id="tickerInputItem" class="p-3 hidden">
             <label for="tickerInput">Ticker Symbol</label>
             <select id="tickerInput" name="tickerInput" class="form-control">
               <option value="">-- Pick a Symbol --</option>
