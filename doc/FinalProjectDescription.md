@@ -9,15 +9,15 @@ You will be working in a group of two or three people. Everyone must write for c
 You must meet these requirements in order to pass.
 
 - [ ] Your project must make one asynchronous call per person in your group.
-- [ ] You must use an aysnchronous library or API that we covered in class (Fetch, Axios and/or Async & Await).
+- [x] You must use an aysnchronous library or API that we covered in class (Fetch, Axios and/or Async & Await).
 - [ ] You will need at least one API that will return images somewhere within the results. You must display images on the page from this API call.
-- [ ] You must store content in simple data structures (arrays, objects and sets).
-- [ ] Your code must contain at least one high order function with arrays (e.g. _Array.forEach_, _Array.map_, _Array.find_, _Array.filter_ and _Array.reduce_).
+- [x] You must store content in simple data structures (arrays, objects and sets).
+- [x] Your code must contain at least one high order function with arrays (e.g. _Array.forEach_, _Array.map_, _Array.find_, _Array.filter_ and _Array.reduce_).
 - [ ] Your code should not have any Cross Site Scripting (XSS) vulnerabilities. If you convert a string into HTML at any point, you must use a [library](https://www.npmjs.com/search?q=xss) to sanitize the HTML.
-- [ ] You must have at least one arrow function (but we encourage you to use more than that).
+- [x] You must have at least one arrow function (but we encourage you to use more than that).
 - [ ] It will be an **automatic failure** if you use _var_.
-- [ ] You must show and hide DOM elements on the screen.
-- [ ] You must handle at least three different events.
+- [x] You must show and hide DOM elements on the screen.
+- [x] You must handle at least three different events.
 - [ ] You must handle user input somewhere within the project. (For example, handle a search engine or display text that the user typed somewhere on the page).
 - [ ]
 Limit your use of global variables. You can do this by organizing yours code. Some ideas are breaking your code into different functions, making use of the [Module Design Pattern](https://scotch.io/bar-talk/4-javascript-design-patterns-you-should-know), and using ES6 Modules.
