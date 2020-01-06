@@ -85,6 +85,11 @@ export class D3Component extends Component {
         return y(d.close);
       });
 
+    // Define the div for the tooltip
+    let div = d3.select("body").append("div")    
+        .attr("class", "tooltip")                
+        .style("opacity", 0);
+
     // Adds the svg canvas
     let svg = d3
       .select(plotElementId)
@@ -131,5 +136,37 @@ export class D3Component extends Component {
       .append("g")
       .attr("class", "y axis")
       .call(yAxis);
+
+// Add the scatterplot
+svg.selectAll("dot")    
+  .data(data)            
+  .enter().append("circle")                                
+  .attr("r", 2)        
+  .attr("cx", function(d) { return x(d.date); })         
+  .attr("cy", function(d) { return y(d.close); })        
+  .on("mouseover", function(d) {        
+div.transition()        
+  .duration(200)        
+  .style("opacity", .9);        
+
+  // convert date for tooltip
+  let yearFmt = d.date.getFullYear();
+  let _monthFmt = d.date.getMonth() + 1;
+  let monthFmt = _monthFmt.length < 2 ? '0' + _monthFmt : _monthFmt;
+  let _dayFmt = d.date.getDate();
+  let dayFmt = _dayFmt.length < 2 ? '0' + _dayFmt : _dayFmt;
+  let dateFmt = `${yearFmt}-${monthFmt}-${dayFmt}`;
+
+div.html(dateFmt + "<br/>"  + d.close)    
+  .style("left", (d3.event.pageX) + "px")        
+  .style("top", (d3.event.pageY - 28) + "px");    
+})                    
+.on("mouseout", function(d) {        
+  div.transition()        
+    .duration(500)        
+    .style("opacity", 0);    
+});
+
   }
+
 }
