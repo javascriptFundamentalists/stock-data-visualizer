@@ -1,0 +1,153 @@
+$appbar-height: 18vh;
+$sidebar-width: 15vw;
+$color-alpha-primary: slategrey;
+$color-beta-primary: white;
+
+html,
+body {
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+
+  > * {
+    margin: 0;
+  }
+}
+
+ul {
+  list-style-type: none;
+}
+
+// padding scaling
+$paddings: (
+  0: none,
+  1: 0.2rem,
+  2: 0.4rem,
+  3: 0.8rem,
+  4: 1.6rem,
+  5: 3.2rem
+);
+
+@mixin padding-modifiers {
+  @each $scale, $size in $paddings {
+    &-#{$scale} {
+      padding: $size;
+    }
+  }
+}
+
+.p {
+  @include padding-modifiers;
+}
+
+.appbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: $appbar-height;
+  width: 100vw;
+  text-align: left;
+  z-index: 2;
+  padding-left: 2.5rem;
+  box-shadow: 0px 2px 10px black;
+}
+
+.appbar-primary {
+  background-color: $color-alpha-primary;
+  color: $color-beta-primary;
+  a {
+    color: $color-beta-primary;
+    font-size: 1.8rem;
+    text-decoration: none;
+  }
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: $sidebar-width;
+  height: 100vh;
+  margin-top: $appbar-height;
+
+  ul {
+    padding-left: 0;
+    text-align: left;
+  }
+}
+
+.sidebar-primary {
+  background-color: $color-alpha-primary;
+  color: $color-beta-primary;
+  a {
+    color: $color-beta-primary;
+    font-size: 1.5rem;
+    text-decoration: none;
+  }
+}
+
+.content {
+  position: fixed;
+  top: 0;
+  left: 0;
+  margin-top: $appbar-height;
+  margin-left: $sidebar-width;
+  height: 100vh - $appbar-height;
+  width: 100vw - $sidebar-width;
+}
+
+.plot {
+  width: 100%;
+  height: 100%;
+  padding-top: 3rem;
+}
+
+#hello {
+  top: 50vh;
+  left: 50vw;
+  position: fixed;
+  color: black;
+}
+
+// D3 styles
+body { font: 12px Arial;}
+
+path { 
+  stroke: steelblue;
+  stroke-width: 2;
+  fill: none;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: grey;
+  stroke-width: 1;
+  shape-rendering: crispEdges;
+}
+
+.hidden {
+  display: none !important;
+}
+
+div.tooltip {    
+  position: absolute;            
+  text-align: center;            
+  width: 100px;                    
+  height: 28px;                    
+  padding: 2px;                
+  font: 12px sans-serif;        
+  background: lightsteelblue;    
+  border: 0px;        
+  border-radius: 8px;            
+  pointer-events: none;            
+}
+

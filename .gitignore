@@ -1,3 +1,5 @@
 node_modules/
 WebpackTutorial.md
 *.swp
+.DS_Store
+config*
