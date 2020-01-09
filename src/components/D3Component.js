@@ -157,6 +157,7 @@ div.transition()
   let dayFmt = _dayFmt.length < 2 ? '0' + _dayFmt : _dayFmt;
   let dateFmt = `${yearFmt}-${monthFmt}-${dayFmt}`;
 
+// <<<<<<<<<<< Hover label
 div.html(dateFmt + "<br/>"  + d.close)    
   .style("left", (d3.event.pageX) + "px")        
   .style("top", (d3.event.pageY - 28) + "px");    
@@ -166,6 +167,7 @@ div.html(dateFmt + "<br/>"  + d.close)
     .duration(500)        
     .style("opacity", 0);    
 });
+// >>>>>>>>>>>>>>>>>>>>
 
   }
 
