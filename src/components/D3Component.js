@@ -158,7 +158,7 @@ div.transition()
   let dateFmt = `${yearFmt}-${monthFmt}-${dayFmt}`;
 
 // <<<<<<<<<<< Hover label
-div.html(dateFmt + "<br/>"  + d.close)    
+div.html("date: " + dateFmt + "<br/>" + "price: " + d.close)    
   .style("left", (d3.event.pageX) + "px")        
   .style("top", (d3.event.pageY - 28) + "px");    
 })                    
