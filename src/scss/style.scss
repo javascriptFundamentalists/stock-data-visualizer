@@ -3,6 +3,10 @@ $sidebar-width: 15vw;
 $color-alpha-primary: slategrey;
 $color-beta-primary: white;
 
+@import "node_modules/@glidejs/glide/src/assets/sass/glide.core";
+@import "node_modules/@glidejs/glide/src/assets/sass/glide.theme";
+
+
 html,
 body {
   height: 100%;
@@ -151,3 +155,7 @@ div.tooltip {
   pointer-events: none;            
 }
 
+// Image styles
+.logo > img {
+  max-height: 64px;
+}

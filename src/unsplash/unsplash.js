@@ -1,0 +1,13 @@
+import Unsplash from 'unsplash-js';
+import * as config from '../../config.json';
+
+const API_KEY = config.default.UNSPLASH_API_KEY;
+
+export const unsplash = new Unsplash({accessKey: API_KEY});
+export const getRandomImage = (queryObj) => {
+  const promise1 = unsplash.photos.getRandomPhoto(queryObj);
+  return promise1;
+}
+
+
+

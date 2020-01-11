@@ -61,4 +61,17 @@ describe('Store state manager testing', () => {
     });
   });
 
+  the_store('should be able to force notify', () => {
+    const store = new Store();
+    const fixture = statefulFixtureFactory();
+    fixture.set({});
+    store.update({foo: 'bar'})
+    const fooListener = () => { fixture.set({updated: true}) };
+    store.subscribe(fooListener);
+    store.update({foo: 'bar'}) // should not notify
+    expect(fixture.get()).to.deep.equal({});
+    store.update({foo: 'bar'}, true) // should notify
+    expect(fixture.get()).to.deep.equal({updated: true});
+  });
+
 });
