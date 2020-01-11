@@ -12,12 +12,14 @@ export class AppComponent extends Component {
   template(data) {
     return html`
       <nav class="appbar appbar-primary">
+        <div id="logo" class="logo" />
         <div class="p-5">
           <a class="appbar-link" href="#">Stock Visuals</a>
         </div>
       </nav>
       <div id="sidebar" class="sidebar sidebar-primary"></div>
       <div id="content" class="content content-primary"></div>
+      <div id="carousel" class="carousel"></div>
     `;
   }
 
