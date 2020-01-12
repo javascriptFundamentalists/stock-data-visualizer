@@ -12,6 +12,6 @@ export const getCompaniesData = () => {
 }
 
 export const getFundamentalsData = (cik) => {
-  const promise = axios.get(PROXY + `https://api.usfundamentals.com/v1/indicators/xbrl?companies=${cik}&indicators=Assets,AssetsCurrent,Liabilities,LiabilitiesCurrent&periods=2019&token=${API_KEY}`);
+  const promise = axios.get(PROXY + `https://api.usfundamentals.com/v1/indicators/xbrl?companies=${cik}&indicators=Assets,AssetsCurrent,Liabilities,LiabilitiesCurrent&periods=2018&token=${API_KEY}`);
   return promise;
 }
