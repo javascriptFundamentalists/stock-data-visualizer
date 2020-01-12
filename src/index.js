@@ -6,9 +6,9 @@ import "./scss/style.scss";
 import { AppComponent } from "./components/App";
 import { D3Component } from "./components/D3Component";
 import { SideBarComponent } from "./components/Sidebar";
-import { ImageComponent, CarouselComponent } from "./components/Image";
+import { CarouselComponent } from "./components/Image";
 
-import { getRandomImage } from "./unsplash/unsplash";
+import { getRandomFinanceImages } from "./unsplash/unsplash";
 import { readBATSmetadata } from "./d3/csv";
 import { readCHRISmetadata } from "./d3/csv";
 
@@ -21,22 +21,20 @@ const sources = [
 (async () => {
   const codes = [];
 
-  const imageUrlPromise = await getRandomImage({ username: "naoufal" });
+  const imageUrlPromise = await getRandomFinanceImages(5);
   const imageData = await imageUrlPromise.json();
-  const imageUrl = imageData.urls.thumb;
-  const carouselUrls = [imageUrl, imageUrl, imageUrl];
+  const carouselUrls = imageData.results.map(x => { return x.urls.thumb });
 
   const seedData = { 
     tickers: codes,
     sources: sources,
-    imageUrl: imageUrl,
     carouselUrls: carouselUrls
   }
 
   const app = new AppComponent(seedData, "root", [
-    [new ImageComponent({}, null, []), "logo"],
-    [new SideBarComponent({}, null, []), "sidebar"],
     [new D3Component({}, null, []), "content"],
-    [new CarouselComponent({}, null, []), "carousel"],
+    [new SideBarComponent({}, null, [
+      [new CarouselComponent({}, null, []), "carousel"],
+    ]), "sidebar"],
   ]);
 })();

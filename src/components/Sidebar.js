@@ -17,7 +17,7 @@ export class SideBarComponent extends Component {
               )};
             </select>
           </li>
-          <li id="tickerInputItem" class="p-3 hidden">
+          <li id="tickerInputItem" class="p-3">
             <label for="tickerInput">Ticker Symbol</label>
             <select id="tickerInput" name="tickerInput" class="form-control">
               <option value="">-- Pick a Symbol --</option>
@@ -30,6 +30,7 @@ export class SideBarComponent extends Component {
           </li>
         </ul>
       </div>
+      <div id="carousel" class="carousel" />
     `;
   }
 
@@ -43,11 +44,12 @@ export class SideBarComponent extends Component {
 
   showTickerInput() {
     const tickerInput = document.getElementById('tickerInputItem');
-    tickerInput.classList.remove('hidden');
   }
 
   triggerDataSourceChange(e) {
     const source = e.target.value;
+    const tickerInput = document.getElementById('tickerInput');
+    tickerInput.selectedIndex = "0";
     this.triggerCustomEvent("data-source-change", {dataSource: source});
     this.showTickerInput()
   }
