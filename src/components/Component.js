@@ -1,51 +1,5 @@
 import { html, render } from 'lit-html';
-
-
-/**
- * A simple data store.
- *
- * The store is an Observer, listening for changes to its data.
- * On change, it will notify subscribers.
- */
-export class Store {
-  constructor () {
-    this.listeners = new Set([]);
-    this.data = {};
-  }
-
-  subscribe (listener) {
-    this.listeners.add(listener);
-  }
-
-  unsubscribe (listener) {
-    this.listeners.delete(listener);
-  }
-
-  notify (...args) {
-    this.listeners.forEach(listener => {
-      listener(...args);
-    });
-  }
-
-  /**
-   * Conditionally update the data in state and notify subscribers.
-   */
-  update ( data ) {
-    if ( !this.deepEqual(data, this.data) ) {
-      Object.assign(this.data, data);
-      this.notify();
-    }
-  }
-
-  /**
-   * TODO: complete the deepEquals method
-   *
-   * Compare to objects for equality.
-   */
-  deepEqual (obj1, obj2) {
-    return false;
-  }
-}
+import { Store } from './store';
 
 /**
  * Base class for visual components.
@@ -58,10 +12,17 @@ export class Component {
     this.store = new Store();
     this.store.subscribe(() => {this.render(this.store.data, this.parentId)})
 
-    this.store.update(data)
+    this.preMount()
+    this.store.update(data, true) // force render
     this.registerEvents();
     this.attachMany(children);
   }
+
+  // fires after render in this.render
+  postMount() {}
+
+  // fires before render in constructor?
+  preMount() {}
 
   // TODO: method to destroy a Component gracefully
   destroy () {}
@@ -74,7 +35,7 @@ export class Component {
       child.parentId = parentId;
       this.children.push(child);
       const allData = Object.assign(this.store.data, child.store.data);
-      this.update(allData);
+      this.update(allData, true); // force render
       child.registerEvents();
     }
   }
@@ -120,14 +81,15 @@ export class Component {
       render(this.template(data), parent);
 
       this.children.forEach(child => child.render(data, child.parentId));
+      this.postMount()
     }
   }
 
   /**
    * Accessor method for this.store.update
    */
-  update ( data ) {
-    this.store.update(data);
+  update ( data, force=false ) {
+    this.store.update(data, force);
   }
 
   /**

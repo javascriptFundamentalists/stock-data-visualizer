@@ -6,7 +6,9 @@ import "./scss/style.scss";
 import { AppComponent } from "./components/App";
 import { D3Component } from "./components/D3Component";
 import { SideBarComponent } from "./components/Sidebar";
+import { CarouselComponent } from "./components/Image";
 
+import { getRandomFinanceImages } from "./unsplash/unsplash";
 import { readBATSmetadata } from "./d3/csv";
 import { readCHRISmetadata } from "./d3/csv";
 
@@ -17,11 +19,22 @@ const sources = [
 ];
 
 (async () => {
-  const data = await readCHRISmetadata();
   const codes = [];
 
-  const app = new AppComponent({ tickers: codes, sources: sources }, "root", [
-    [new SideBarComponent({}, null, []), "sidebar"],
-    [new D3Component({}, null, []), "content"]
+  const imageUrlPromise = await getRandomFinanceImages(5);
+  const imageData = await imageUrlPromise.json();
+  const carouselUrls = imageData.results.map(x => { return x.urls.thumb });
+
+  const seedData = { 
+    tickers: codes,
+    sources: sources,
+    carouselUrls: carouselUrls
+  }
+
+  const app = new AppComponent(seedData, "root", [
+    [new D3Component({}, null, []), "content"],
+    [new SideBarComponent({}, null, [
+      [new CarouselComponent({}, null, []), "carousel"],
+    ]), "sidebar"],
   ]);
 })();

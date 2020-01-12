@@ -12,6 +12,7 @@ export class AppComponent extends Component {
   template(data) {
     return html`
       <nav class="appbar appbar-primary">
+        <div id="logo" class="logo" />
         <div class="p-5">
           <a class="appbar-link" href="#">Stock Visuals</a>
         </div>

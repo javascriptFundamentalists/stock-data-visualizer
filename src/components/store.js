@@ -26,11 +26,16 @@ export class Store {
 
   /**
    * Conditionally update the data in state and notify subscribers.
+   *
+   * Can be forced to update and notify by passing force=<SOMETHING TRUTHY>
+   *
    */
-  update ( data ) {
-    if ( !this.deepEqual(data, this.data) ) {
+  update ( data, force=false ) {
+    if ( !this.deepEqual(data, this.data) || force == true ) {
       Object.assign(this.data, data);
       this.notify();
+    } else {
+      // pass
     }
   }
 

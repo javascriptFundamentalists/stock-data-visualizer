@@ -3,6 +3,11 @@ $sidebar-width: 15vw;
 $color-alpha-primary: slategrey;
 $color-beta-primary: white;
 
+@import "../../node_modules/@glidejs/glide/src/assets/sass/glide.core";
+@import "../../node_modules/@glidejs/glide/src/assets/sass/glide.theme";
+@import "../../node_modules/animate.css/animate.css";
+
+
 html,
 body {
   height: 100%;
@@ -149,5 +154,15 @@ div.tooltip {
   border: 0px;        
   border-radius: 8px;            
   pointer-events: none;            
+}
+
+// Image styles
+.logo > img {
+  max-height: 64px;
+}
+
+.carousel {
+  margin-top: 15rem;
+  margin-left: 5px;
 }
 
