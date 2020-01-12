@@ -5,7 +5,7 @@ import * as d3 from "d3";
 export class D3Component extends Component {
   template(data) {
     return html`
-      <div id="plot"></div>
+      <div id="plot" class="plot"></div>
     `;
   }
 
@@ -16,7 +16,6 @@ export class D3Component extends Component {
 
         // for BATS data
         if ( data.batsData ) {
-          console.log('using BATS data');
           const rawDataArray = data.batsData.dataset.data;
           const parsedDataArray = rawDataArray.map(row => {
             return { date: row[0], close: row[1] };
@@ -28,7 +27,6 @@ export class D3Component extends Component {
 
         // for CHRIS data
         if ( data.chrisData ) {
-          console.log('using CHRIS data');
           const rawDataArray = data.chrisData.dataset.data;
           const parsedDataArray = rawDataArray.map(row => {
             return { date: row[0], close: row[5] };

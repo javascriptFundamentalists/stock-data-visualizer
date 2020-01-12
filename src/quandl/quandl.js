@@ -27,3 +27,4 @@ export const getCHRISData = (code) => {
   const dataPromise = axios.get(url);
   return dataPromise;
 }
+
