@@ -150,4 +150,63 @@ div.tooltip {
   border-radius: 8px;            
   pointer-events: none;            
 }
+item{
+  width:250px;
+  height:250px;
+  margin:30px;}
+  
+  
+  .thumbnail-slider{
+    width : 100%;
+    float : left;
+    overflow : hidden;
+  }
+  
+  .thumbnail-slider .thumbnail-container {
+    width :100%;
+    float : left;
+    transition: margin 1s ease;
+  }
+  
+  .thumbnail-slider .item {
+    width:200px;
+    background-color: gray;
+    line-height: 250px;
+    text-align: center;
+    font-size: 50px;
+    color: #ffffff;
+    float: left;
+    margin :33px;
+    
+  }
+  
+  .thumbnail-slider .controls{
+    width: 100%;
+    float: left;
+    padding: 15px;
+  }
+  
+  .thumbnail-slider .controls ul{
+    display: block;
+    text-align: center;
+    padding:0;
+    margin: 0;
+    list-style: none;
+  }
+  
+  .thumbnail-slider .controls ul li {
+    height:  35px;
+    width: 35px;
+    border: 1px solid #c3c3c3;
+    margin:  4px;
+    display: inline-block;
+    line-height: 33px;
+    cursor: pointer;
+  
+  }
+  
+  .thumbnail-slider .controls ul li .active{
+    background-color: green;
+    color: #ffffff;
+  }
 
