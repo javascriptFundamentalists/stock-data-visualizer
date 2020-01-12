@@ -150,7 +150,7 @@ $paddings: (
   left: 0;
   margin-top: $appbar-height;
   margin-left: $sidebar-width;
-  height: 100vh - $appbar-height;
+  height: 85vh - $appbar-height;
   width: 100vw - $sidebar-width;
 }
 
@@ -200,6 +200,12 @@ div.tooltip {
   border-radius: 8px;            
   pointer-events: none;            
 }
+item{
+  width:250px;
+  height:250px;
+  margin:30px;}
+  
+
 
 // Image styles
 .logo {
@@ -398,4 +404,58 @@ div.tooltip {
     border: 1px solid;
     padding: 1rem;
   }
+}
+
+/* Form 1 (two fields) */
+#signup input[type="text"]{
+  width:170px;
+  height:1rem;
+  display:block;
+  float:left;
+  background-color: slategray;
+  margin: 1120px 5px 10px 0;
+  color: black;
+  -webkit-appearance:none;
+  -moz-appearance:none;
+  -ms-appearance:none;
+  -o-appearance:none;
+  appearance:none;
+  border:none;
+  -webkit-border-radius:4px;
+  -moz-border-radius:4px;
+  border-radius:4px;
+  font-size:15px;
+  padding:0;
+  transition: all 250ms ease-in;
+}
+
+/* Submit button */
+#signup input[type="submit"]{
+  width:150px;
+  height: 1rem;
+  background:#244afb;
+  color:#fff;
+  display:block;
+  float:right;
+  margin: 1120px 0 5px 0;
+  -webkit-appearance:none;
+  -moz-appearance:none;
+  -ms-appearance:none;
+  -o-appearance:none;
+  appearance:none;
+  border:none;
+  -webkit-border-radius:4px;
+  -moz-border-radius:4px;
+  border-radius:4px;
+  font-size:15px;
+  padding:0;
+  transition: all 250ms ease-in;
+}
+#signup input[type="submit"]:hover{
+  cursor:pointer;
+  background:#444;
+}
+.socialmedia{
+  font-size: 25px;
+  margin: 0px 0px 70px 0px;
 }

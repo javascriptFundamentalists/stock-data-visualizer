@@ -13,7 +13,6 @@ import { ThemeComponent } from "./components/ThemePicker";
 import { getRandomFinanceImages } from "./unsplash/unsplash";
 import { readBATSmetadata } from "./d3/csv";
 import { readCHRISmetadata } from "./d3/csv";
-import { getFundamentalsData } from "./usfundamentals/usfundamentals";
 
 // available data sources
 const sources = [
@@ -27,6 +26,9 @@ const sources = [
   const imageUrlPromise = await getRandomFinanceImages(5);
   const imageData = await imageUrlPromise.json();
   const carouselUrls = imageData.results.map(x => { return x.urls.thumb });
+ // carouselUrls.push('img6.jpg');
+ // ['img1.jpg', 'img2.jpg', ...] .forEach(url => carouselUrls.push('url'))
+
 
   const seedData = { 
     tickers: codes,
@@ -44,3 +46,4 @@ const sources = [
     [new FundamentalsComponent({}, null, []), "fundamentalsPanel"],
   ]);
 })();
+
