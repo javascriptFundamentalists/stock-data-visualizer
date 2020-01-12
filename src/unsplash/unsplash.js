@@ -8,6 +8,10 @@ export const getRandomImage = (queryObj) => {
   const promise1 = unsplash.photos.getRandomPhoto(queryObj);
   return promise1;
 }
+export const getRandomFinanceImages = (count) => {
+  const promise = unsplash.search.photos("finance", 1, count, { orientation: 'portrait' });
+  return promise
+}
 
 
 

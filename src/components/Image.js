@@ -1,4 +1,5 @@
 import Glide from '@glidejs/glide';
+//import { Autoplay } from '@glidejs/glide/dist/glide.modular.esm';
 import { html } from 'lit-html';
 import { unsplash } from '../unsplash/unsplash';
 import { Component } from './Component';
@@ -15,7 +16,9 @@ export class ImageComponent extends Component {
 export class CarouselComponent extends Component {
 
   postMount () {
-    this.glide = new Glide('.glide').mount();
+    this.glide = new Glide('.glide', {
+      autoplay: 5000
+    }).mount();
   }
 
   template (data) {
@@ -31,10 +34,6 @@ export class CarouselComponent extends Component {
               `
             )};
           </ul>
-        </div>
-        <div class="glide__arrows" data-glide-el="controls">
-            <button class="glide__arrow glide__arrow--left" data-glide-dir="<">prev</button>
-            <button class="glide__arrow glide__arrow--right" data-glide-dir=">">next</button>
         </div>
       </div>
     `;
