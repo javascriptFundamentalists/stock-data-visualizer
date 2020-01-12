@@ -21,6 +21,7 @@ export class AppComponent extends Component {
       </nav>
       <div id="sidebar" class="sidebar sidebar-primary"></div>
       <div id="content" class="content content-primary"></div>
+      <div id="fundamentalsPanel" class="fundamentals fundamentals-primary"></div>
     `;
   }
 
