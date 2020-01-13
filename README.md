@@ -3,8 +3,6 @@ Stock Data Visualizer
 
 ## Intro
 
-![screenshot](screenshot.gif)
-
 This app is a toy example of working with financial data in vanilla javascript. The
 app sources data from two financial data API's ![Quandl](https://www.quandl.com/)
 and ![US Fundamentals](http://www.usfundamentals.com/) as well as !(unsplash)[https://unsplash.com/].
