@@ -84,16 +84,17 @@ export class AppComponent extends Component {
 
   updateData(e) {
     const tickerSymbol = e.detail.tickerSymbol;
+    const startDate = e.detail.startDate;
 
-    const newData = { dataSet: tickerSymbol, batsData: false, chrisData: false };
+    const newData = { dataSet: tickerSymbol, startDate: startDate, exchange: e.detail.exchange, batsData: false, chrisData: false };
     if ( this.store.data.dataSource === 'bats' ) {
-      const dataPromise = getBATSData(tickerSymbol);
+      const dataPromise = getBATSData(tickerSymbol, startDate);
       dataPromise.then(data => {
         newData.batsData = data.data;
         this.update(newData);
       });
     } else {
-      const dataPromise = getCHRISData(tickerSymbol);
+      const dataPromise = getCHRISData(tickerSymbol, startDate);
       dataPromise.then(data => {
         newData.chrisData = data.data;
         this.update(newData);

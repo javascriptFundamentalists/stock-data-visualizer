@@ -39,6 +39,18 @@ export class SideBarComponent extends Component {
               )};
             </select>
           </li>
+          <li id="useDatesInputItem" class="p-3">
+            <input type="checkbox" id="useDateInput" name="useDateInput" class="" />
+            <label for="useDateInput">Use Start Date?</label>
+          </li>
+          <li id="startDateInputItem" class="p-3 invisible">
+            <label for="startDateInput">Start Date</label>
+            <div class="inline-radio">
+              <input type="radio" name="startDate" value="2017-01-01">2017</input>
+              <input type="radio" name="startDate" value="2018-01-01">2018</input>
+              <input type="radio" name="startDate" value="2019-01-01" checked="true">2019</input>
+            </div>
+          </li>
         </ul>
       </div>
       <div id="carousel" class="carousel" />
@@ -47,6 +59,8 @@ export class SideBarComponent extends Component {
 
   events() {
     return [
+      {type: "change", selector: "[name='startDate']", handler: this.triggerDataChange},
+      {type: "change", selector: "#useDateInput", handler: this.toggleDateInput},
       {type: "click", selector: "a", handler: this.triggerDataChange},
       {type: "change", selector: "#tickerInput", handler: this.triggerDataChange},
       {type: "change", selector: "#exchangeInput", handler: this.triggerDataExchangeChange},
@@ -54,8 +68,40 @@ export class SideBarComponent extends Component {
     ];
   }
 
-  showTickerInput() {
-    const tickerInput = document.getElementById('tickerInputItem');
+  validateSidebar() {
+    const selectValid = (selectElement) => { return selectElement.selectedIndex !== 0 };
+    let valid = true;
+    const elements = [
+      document.getElementById('dataSourceInput'),
+      document.getElementById('exchangeInput'),
+      document.getElementById('tickerInput'),
+    ]
+    elements.forEach(el => {
+      if ( !selectValid(el) ) {
+        valid = false;
+        el.classList.add('error');
+      } else {
+        el.classList.remove('error');
+      }
+    });
+    return valid;
+  }
+
+  gatherQueryDetails() {
+    const details = {
+      tickerSymbol: document.getElementById('tickerInput').value,
+      exchange: document.getElementById('exchangeInput').value,
+      dataSource: document.getElementById('dataSourceInput').value,
+      startDate: [...document.querySelectorAll("[name='startDate']")].find(
+        el => { return el.checked }
+      ).value
+    }
+    return details;
+  }
+
+  toggleDateInput(e) {
+    const dateInput = document.getElementById('startDateInputItem');
+    dateInput.classList.toggle('invisible');
   }
 
   triggerDataSourceChange(e) {
@@ -65,14 +111,16 @@ export class SideBarComponent extends Component {
     tickerInput.selectedIndex = "0";
     exchangeInput.selectedIndex = "0";
     this.triggerCustomEvent("data-source-change", {dataSource: source});
-    this.showTickerInput()
   }
 
   triggerDataChange(e) {
     // need to preventDefault here or clicking <a> will navigate
     e.preventDefault();
-    const ticker = e.target.value;
-    this.triggerCustomEvent("data-change", { tickerSymbol: ticker });
+    const validSidebar = this.validateSidebar();
+    if ( validSidebar ) {
+      const details = this.gatherQueryDetails();
+      this.triggerCustomEvent("data-change", details);
+    }
   }
 
   triggerDataExchangeChange(e) {

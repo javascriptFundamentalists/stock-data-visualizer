@@ -9,8 +9,8 @@ const API_KEY = config.default.QUANDL_API_KEY;
  * Documentation: https://www.quandl.com/data/BATS-BATS-U-S-Stock-Exchanges
  *
  */
-export const getBATSData = (code) => {
-  const url = `https://www.quandl.com/api/v3/datasets/BATS/${code}.json?api_key=${API_KEY}`;
+export const getBATSData = (code, startDate) => {
+  const url = `https://www.quandl.com/api/v3/datasets/BATS/${code}.json?start_date=${startDate}&api_key=${API_KEY}`;
   const dataPromise = axios.get(url);
   return dataPromise;
 };
@@ -21,8 +21,8 @@ export const getBATSData = (code) => {
  * Documentation: https://www.quandl.com/data/CHRIS-Wiki-Continuous-Futures
  *
  */
-export const getCHRISData = (code) => {
-  const url = `https://www.quandl.com/api/v3/datasets/CHRIS/${code}.json?start_date=2000-01-01&end_date=2020-12-31&api_key=${API_KEY}`;
+export const getCHRISData = (code, startDate) => {
+  const url = `https://www.quandl.com/api/v3/datasets/CHRIS/${code}.json?start_date=${startDate}&api_key=${API_KEY}`;
   const dataPromise = axios.get(url);
   return dataPromise;
 }
