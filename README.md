@@ -6,8 +6,8 @@ Stock Data Visualizer
 ## Intro
 
 This app is a toy example of working with financial data in vanilla javascript. The
-app sources data from two financial data API's ![Quandl](https://www.quandl.com/)
-and ![US Fundamentals](http://www.usfundamentals.com/) as well as !(unsplash)[https://unsplash.com/].
+app sources data from two financial data API's [Quandl](https://www.quandl.com/)
+and [US Fundamentals](http://www.usfundamentals.com/) as well as (unsplash)[https://unsplash.com/].
 
 ### Features
 
@@ -216,7 +216,7 @@ export class CarouselComponent extends Component {
 
 ## What's up with the random image carousel?
 
-This was a class project for the excellent ![AlbanyCanCode](https://albanycancode.org/)
+This was a class project for the excellent [AlbanyCanCode](https://albanycancode.org/)
 program, and one of the criteria for acceptance was sourcing images from an api.
 However, as it turns out, financial data is all about numbers and there aren't
 any images that really fit besides the ones we make with D3... so, enjoy the
@@ -224,6 +224,6 @@ slideshow!
 
 ## Contributors
 
-Zach Waite <zach@waiteperspectives.com>
-Brian Ha <brianha32@gmail.com>
-Kruti Vyas <vyasktruti89@gmail.com>
+* Zach Waite <zach@waiteperspectives.com>
+* Brian Ha <brianha32@gmail.com>
+* Kruti Vyas <vyasktruti89@gmail.com>
