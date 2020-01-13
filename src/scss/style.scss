@@ -172,7 +172,7 @@ div.tooltip {
 
 
 .carousel {
-  margin-top: 15rem;
+  margin-top: 4rem;
   margin-left: 5px;
 }
 
@@ -310,4 +310,17 @@ div.tooltip {
 
 .text-left {
   text-align: left;
+}
+
+.mw-100 {
+  max-width: 100%;
+}
+
+.invisible {
+  opacity: 0;
+}
+
+.error {
+  border: 2px solid red;
+  transition: all 100ms linear;
 }

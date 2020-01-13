@@ -2,12 +2,29 @@ import { html } from "lit-html";
 import { Component } from "./Component";
 import * as d3 from "d3";
 
+/**
+ * Utility function to stringify a Date object for presentation
+ *
+ */
+const dateFormatted = (d) => {
+    let yearFmt = d.date.getFullYear();
+
+    let _monthFmt = d.date.getMonth() + 1;
+    let monthFmt = _monthFmt.length < 2 ? '0' + _monthFmt : _monthFmt;
+
+    let _dayFmt = d.date.getDate();
+    let dayFmt = _dayFmt.length < 2 ? '0' + _dayFmt : _dayFmt;
+
+    return `${yearFmt}-${monthFmt}-${dayFmt}`;
+}
+
 export class D3Component extends Component {
   template(data) {
     return html`
       <div id="plot" class="plot"></div>
     `;
   }
+
 
   render(data, parentId) {
     super.render(data, parentId);
@@ -40,8 +57,6 @@ export class D3Component extends Component {
 
   }
 
-  // TODO: should this consider the component or
-  // just the plot element?
   clearPlot(selector) {
     const el = document.querySelector(selector);
     if (el) {
@@ -51,7 +66,6 @@ export class D3Component extends Component {
     }
   }
 
-  // TODO: Big time refactoring
   renderPlot(data, plotElementId) {
     let csvdata = data;
 
@@ -65,12 +79,9 @@ export class D3Component extends Component {
     let y = d3.scaleLinear().range([height, 0]);
 
     // Define the axes
-    //let xAxis = d3.svg.axis().scale(x)
-    //    .orient("bottom").ticks(5);
     let xAxis = d3.axisBottom(x);
 
     //let yAxis = d3.svg.axis().scale(y)
-    //    .orient("left").ticks(5);
     let yAxis = d3.axisLeft(y);
 
     // Define the line
@@ -135,38 +146,32 @@ export class D3Component extends Component {
       .attr("class", "y axis")
       .call(yAxis);
 
-// Add the scatterplot
-svg.selectAll("dot")    
-  .data(data)            
-  .enter().append("circle")                                
-  .attr("r", 2)        
-  .attr("cx", function(d) { return x(d.date); })         
-  .attr("cy", function(d) { return y(d.close); })        
-  .on("mouseover", function(d) {        
-div.transition()        
-  .duration(200)        
-  .style("opacity", .9);        
+    // Add the scatterplot
+    svg.selectAll("dot")    
+      .data(data)            
+      .enter().append("circle")                                
+      .attr("r", 2)        
+      .attr("cx", function(d) { return x(d.date); })         
+      .attr("cy", function(d) { return y(d.close); })        
+      .on("mouseover", function(d) {        
+    div.transition()        
+      .duration(200)        
+      .style("opacity", .9);        
 
-  // convert date for tooltip
-  let yearFmt = d.date.getFullYear();
-  let _monthFmt = d.date.getMonth() + 1;
-  let monthFmt = _monthFmt.length < 2 ? '0' + _monthFmt : _monthFmt;
-  let _dayFmt = d.date.getDate();
-  let dayFmt = _dayFmt.length < 2 ? '0' + _dayFmt : _dayFmt;
-  let dateFmt = `${yearFmt}-${monthFmt}-${dayFmt}`;
+    // convert date for tooltip
+    let dateFmt = dateFormatted(d);
 
-// <<<<<<<<<<< Hover label
-div.html("date: " + dateFmt + "<br/>" + "price: " + d.close)    
-  .style("left", (d3.event.pageX) + "px")        
-  .style("top", (d3.event.pageY - 28) + "px");    
-})                    
-.on("mouseout", function(d) {        
-  div.transition()        
-    .duration(500)        
-    .style("opacity", 0);    
-});
-// >>>>>>>>>>>>>>>>>>>>
-
+    // add the tooltips
+    div.html("date: " + dateFmt + "<br/>" + "price: " + d.close)    
+      .style("text-align", "left")
+      .style("padding-left", "3px")
+      .style("left", (d3.event.pageX) + "px")        
+      .style("top", (d3.event.pageY - 28) + "px");    
+    })                    
+    .on("mouseout", function(d) {        
+      div.transition()        
+        .duration(500)        
+        .style("opacity", 0);    
+    });
   }
-
 }
