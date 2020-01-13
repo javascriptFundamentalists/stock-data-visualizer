@@ -29,6 +29,7 @@ const sources = [
 
   const seedData = { 
     tickers: codes,
+    exchanges: [],
     sources: sources,
     carouselUrls: carouselUrls
   }

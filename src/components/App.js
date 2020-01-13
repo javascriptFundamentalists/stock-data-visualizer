@@ -1,7 +1,7 @@
 import { html } from "lit-html";
 import axios from "axios";
 import { getBATSData, getCHRISData } from "../quandl/quandl";
-import { readBATSmetadata, readCHRISmetadata } from "../d3/csv";
+import { readBATSmetadata, readCHRISmetadata, batsTransformer } from "../d3/csv";
 import { Component } from "./Component";
 
 /**
@@ -28,20 +28,44 @@ export class AppComponent extends Component {
   events() {
     return [
       { type: "data-change", selector: "#root", handler: this.updateData },
-      { type: "data-source-change", selector: "#root", handler: this.loadTickers }
+      { type: "data-source-change", selector: "#root", handler: this.loadExchanges },
+      { type: "data-exchange-change", selector: "#root", handler: this.loadTickers }
     ];
   }
 
+  loadExchanges(e) {
+    const exchanges = new Set([]);
+    if ( e.detail.dataSource === 'bats' ) {
+      readBATSmetadata().then(data => {
+        batsTransformer(data);
+        data.forEach(record => {
+          exchanges.add(record.exchange);
+        });
+        const newData = {exchanges: [...exchanges], dataSource: 'bats', batsData: false, chrisData: false};
+        this.update(newData);
+      });
+    } else {
+      readCHRISmetadata().then(data => {
+        data.forEach(record => {
+          exchanges.add(record.Exchange);
+        });
+        const newData = {exchanges: [...exchanges], dataSource: 'bats', batsData: false, chrisData: false};
+        this.update(newData);
+      });
+    }
+  }
+
   loadTickers(e) {
+
     // load ticker data, then show
     let codes = [];
     if ( e.detail.dataSource === 'bats' ) {
       readBATSmetadata().then(data => {
+        batsTransformer(data);
         codes = data.map(datum => {
-          return {key: datum.code, name: datum.code}
+          return {key: datum.code, name: datum.name, exchange: datum.exchange}
         });
-        // limit to first 100 results for now due to slow dropdown
-        codes = codes.filter((x, ndx) => { return ndx < 100});
+        codes = codes.filter(c => { return c.exchange === e.detail.exchange });
         const newData = {tickers: codes, dataSource: 'bats', batsData: false, chrisData: false};
         this.update(newData);
       });
@@ -49,10 +73,9 @@ export class AppComponent extends Component {
       readCHRISmetadata().then(data => {
         codes = data.map(datum => {
           const symbol = `${datum.Exchange}_${datum.Ticker}1`;
-          return {key: symbol, name: symbol}
+          return {key: symbol, name: datum.Name, exchange: datum.Exchange}
         });
-        // limit to first 100 results for now due to slow dropdown
-        codes = codes.filter((x, ndx) => { return ndx < 100});
+        codes = codes.filter(c => { return c.exchange === e.detail.exchange });
         const newData = {tickers: codes, dataSource: 'chris', batsData: false, chrisData: false};
         this.update(newData);
       });
