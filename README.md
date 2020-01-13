@@ -1,6 +1,8 @@
 Stock Data Visualizer
 =======================
 
+![screenshot](screenshot.gif)
+
 ## Intro
 
 This app is a toy example of working with financial data in vanilla javascript. The
