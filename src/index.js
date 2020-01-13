@@ -8,6 +8,7 @@ import { D3Component } from "./components/D3Component";
 import { SideBarComponent } from "./components/Sidebar";
 import { CarouselComponent } from "./components/Image";
 import { FundamentalsComponent } from "./components/FundamentalsComponent";
+import { ThemeComponent } from "./components/ThemePicker";
 
 import { getRandomFinanceImages } from "./unsplash/unsplash";
 import { readBATSmetadata } from "./d3/csv";
@@ -35,6 +36,7 @@ const sources = [
   }
 
   const app = new AppComponent(seedData, "root", [
+    [new ThemeComponent({}, null, []), "themePicker"],
     [new D3Component({}, null, []), "content"],
     [new SideBarComponent({}, null, [
       [new CarouselComponent({}, null, []), "carousel"],
