@@ -71,9 +71,7 @@ export class FundamentalsComponent extends Component {
       // add new
       // remove header row
       const [ ,...lines] = data.data.split('\n');
-      console.log(lines);
-      if ( !lines ) {
-        console.log('showing');
+      if ( lines.length == 1 ) {
         nodata.classList.remove('hidden');
       }
       lines.forEach(line => {
