@@ -11,17 +11,20 @@ import { Component } from "./Component";
 export class AppComponent extends Component {
   template(data) {
     return html`
-      <nav class="appbar appbar-primary">
+      <nav class="appbar" data-theme="theme-primary">
         <div class="logo">
           <span>
             <img class="logo-img" src="chart-line-solid.svg" alt="logo" />
             Stock Visuals
           </span>
         </div>
+        <div class="menu">
+          <div id="themePicker" class="themePicker" />
+        </div>
       </nav>
-      <div id="sidebar" class="sidebar sidebar-primary"></div>
-      <div id="content" class="content content-primary"></div>
-      <div id="fundamentalsPanel" class="fundamentals fundamentals-primary"></div>
+      <div id="sidebar" class="sidebar" data-theme="theme-primary"></div>
+      <div id="content" class="content" data-theme="theme-primary"></div>
+      <div id="fundamentalsPanel" class="fundamentals" data-theme="theme-primary"></div>
     `;
   }
 
@@ -85,8 +88,17 @@ export class AppComponent extends Component {
   updateData(e) {
     const tickerSymbol = e.detail.tickerSymbol;
     const startDate = e.detail.startDate;
+    const title = e.detail.title
 
-    const newData = { dataSet: tickerSymbol, startDate: startDate, exchange: e.detail.exchange, batsData: false, chrisData: false };
+    const newData = {
+      dataSet: tickerSymbol,
+      startDate: startDate,
+      exchange: e.detail.exchange,
+      batsData: false,
+      chrisData: false,
+      title: title,
+    };
+
     if ( this.store.data.dataSource === 'bats' ) {
       const dataPromise = getBATSData(tickerSymbol, startDate);
       dataPromise.then(data => {

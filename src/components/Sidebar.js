@@ -88,7 +88,9 @@ export class SideBarComponent extends Component {
   }
 
   gatherQueryDetails() {
+    const tickerSelect = document.getElementById('tickerInput');
     const details = {
+      title: tickerSelect.options[tickerSelect.selectedIndex].textContent,
       tickerSymbol: document.getElementById('tickerInput').value,
       exchange: document.getElementById('exchangeInput').value,
       dataSource: document.getElementById('dataSourceInput').value,
