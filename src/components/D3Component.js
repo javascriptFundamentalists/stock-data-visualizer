@@ -10,10 +10,10 @@ const dateFormatted = (d) => {
     let yearFmt = d.date.getFullYear();
 
     let _monthFmt = d.date.getMonth() + 1;
-    let monthFmt = _monthFmt.length < 2 ? '0' + _monthFmt : _monthFmt;
+    let monthFmt = _monthFmt.toString().length < 2 ? '0' + _monthFmt : _monthFmt;
 
     let _dayFmt = d.date.getDate();
-    let dayFmt = _dayFmt.length < 2 ? '0' + _dayFmt : _dayFmt;
+    let dayFmt = _dayFmt.toString().length < 2 ? '0' + _dayFmt : _dayFmt;
 
     return `${yearFmt}-${monthFmt}-${dayFmt}`;
 }
@@ -39,7 +39,7 @@ export class D3Component extends Component {
           });
           data.plotData = parsedDataArray;
           this.clearPlot("#plot");
-          this.renderPlot(data.plotData, "#plot");
+          this.renderPlot(data.plotData, "#plot", data.title);
         }
 
         // for CHRIS data
@@ -50,7 +50,7 @@ export class D3Component extends Component {
           });
           data.plotData = parsedDataArray;
           this.clearPlot("#plot");
-          this.renderPlot(data.plotData, "#plot");
+          this.renderPlot(data.plotData, "#plot", data.title);
         }
 
     }
@@ -66,7 +66,7 @@ export class D3Component extends Component {
     }
   }
 
-  renderPlot(data, plotElementId) {
+  renderPlot(data, plotElementId, title) {
     let csvdata = data;
 
     // Set the dimensions of the canvas / graph
@@ -107,6 +107,14 @@ export class D3Component extends Component {
       .attr("height", height + margin.top + margin.bottom)
       .append("g")
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+    svg.append("text")
+            .attr("x", (width / 2))             
+            .attr("y", 0 - (margin.top / 2))
+            .attr("text-anchor", "middle")  
+            .style("font-size", "16px") 
+            .style("text-decoration", "underline")  
+            .text(title);
 
     csvdata.forEach(function(d) {
       let parseDate = d3.timeParse("%Y-%m-%d");

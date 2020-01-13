@@ -73,6 +73,7 @@ export class FundamentalsComponent extends Component {
       const [ ,...lines] = data.data.split('\n');
       console.log(lines);
       if ( !lines ) {
+        console.log('showing');
         nodata.classList.remove('hidden');
       }
       lines.forEach(line => {
