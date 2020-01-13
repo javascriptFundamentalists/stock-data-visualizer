@@ -9,6 +9,21 @@ export const readBATSmetadata = (filepath) => {
 }
 
 /**
+ * ETL the BATS metadata to extract Exchange
+ */
+export const batsTransformer = (data) => {
+  data.forEach(record => {
+    const symParts = record.code.split('_');
+    if (symParts.length > 1) {
+      record.exchange = symParts[0];
+    } else {
+      record.exchange = '';
+    }
+  });
+}
+
+
+/**
  * Return a promise of CHRIS data
  */
 export const readCHRISmetadata = (filepath) => {
