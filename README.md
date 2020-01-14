@@ -57,9 +57,9 @@ Different patterns can be used with Components. For example, one may prefer to
 have the root Component manage all state, including I/O operations. In this case,
 since data changes will cause children to update as needed, there is no need to
 manage local state at the UI Component level. Alternatively, one may wish to
-have a completely independent Component that operates asyncronously with the
-rest of the app. This pattern is also supported and the component in
-`src/components/FundamentalsComponent.js` demonstrate this technique.
+have a completely independent Component that operates asyncronously. This pattern
+is also supported. The component in `src/components/FundamentalsComponent.js`
+demonstrates this technique.
 
 ### Declaring a component
 
@@ -239,8 +239,8 @@ used in the app to make life better.
 
 This was a class project for the excellent [AlbanyCanCode](https://albanycancode.org/)
 program, and one of the criteria for acceptance was sourcing images from an api.
-However, as it turns out, financial data is all about numbers and there aren't
-any images that really fit besides the ones we make with D3... so, enjoy the
+However, as it turns out, financial data is all about numbers, and there aren't
+any images that really fit (besides the ones we make with D3...) so, enjoy the random
 slideshow!
 
 ## Contributors
