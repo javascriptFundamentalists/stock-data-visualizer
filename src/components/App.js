@@ -36,7 +36,13 @@ export class AppComponent extends Component {
     ];
   }
 
+  /**
+   * Load the exchanges dropdown in the sidebar by updating the app state and
+   * causing the child Sidebar app to rerender.
+   */
   loadExchanges(e) {
+    // TODO: Since there are only two options, live with a little dupage here
+    // factor out common lines when adding more data sources.
     const exchanges = new Set([]);
     if ( e.detail.dataSource === 'bats' ) {
       readBATSmetadata().then(data => {
@@ -58,9 +64,13 @@ export class AppComponent extends Component {
     }
   }
 
+  /**
+   * Populate the Symbol dropdown
+   */
   loadTickers(e) {
-
-    // load ticker data, then show
+    // TODO: when adding more data sources, refactor some of the common code
+    // here and in loadExchanges into e.g. a strategy pattern or map-dispatch
+    // pattern
     let codes = [];
     if ( e.detail.dataSource === 'bats' ) {
       readBATSmetadata().then(data => {
@@ -99,18 +109,18 @@ export class AppComponent extends Component {
       title: title,
     };
 
-    if ( this.store.data.dataSource === 'bats' ) {
-      const dataPromise = getBATSData(tickerSymbol, startDate);
-      dataPromise.then(data => {
-        newData.batsData = data.data;
-        this.update(newData);
-      });
-    } else {
-      const dataPromise = getCHRISData(tickerSymbol, startDate);
-      dataPromise.then(data => {
-        newData.chrisData = data.data;
-        this.update(newData);
-      });
+    // reduce branching by using a map
+    const source = this.store.data.dataSource
+    const dispatchDataSource = {
+      bats: [getBATSData, 'batsData'],
+      chris: [getCHRISData, 'chrisData'],
     }
+    const [getData, dataKey] = dispatchDataSource[source];
+
+    const dataPromise = getData(tickerSymbol, startDate);
+    dataPromise.then(data => {
+      newData[dataKey] = data.data;
+      this.update(newData);
+    });
   }
 }

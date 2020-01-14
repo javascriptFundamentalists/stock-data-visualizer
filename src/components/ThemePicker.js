@@ -19,6 +19,9 @@ export class ThemeComponent extends Component {
     ]
   }
 
+  /**
+   * Switch color themes
+   */
   reSkinApp(e) {
     const themedElements = [...document.querySelectorAll("[data-theme^=theme-]")];
     const themeRadios = [...document.querySelectorAll("[name=themeColor]")];

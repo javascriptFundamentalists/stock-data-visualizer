@@ -1,10 +1,12 @@
 import Glide from '@glidejs/glide';
-//import { Autoplay } from '@glidejs/glide/dist/glide.modular.esm';
 import { html } from 'lit-html';
 import { unsplash } from '../unsplash/unsplash';
 import { Component } from './Component';
 
 
+/**
+ * A basic impage component, expecting a url as a prop
+ */
 export class ImageComponent extends Component {
   template (data) {
     return html`
@@ -13,6 +15,9 @@ export class ImageComponent extends Component {
   }
 }
 
+/**
+ * A Glide.js carousel component
+ */
 export class CarouselComponent extends Component {
 
   postMount () {
