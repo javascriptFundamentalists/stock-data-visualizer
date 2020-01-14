@@ -59,6 +59,12 @@ export class FundamentalsComponent extends Component {
     const fundamentalsSelectEl = e.currentTarget;
     const cik = fundamentalsSelectEl.value;
 
+    // sanity check
+    if ( !/[A-Za-z0-9_]/.test(cik) ) {
+      fundamentalsSelectEl.classList.add('error');
+      return
+    }
+
     getFundamentalsData(cik).then(data => {
       const body = document.getElementById('fundamentalsTableBody');
       const nodata = document.getElementById('nofundamentals');

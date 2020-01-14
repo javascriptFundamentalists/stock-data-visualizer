@@ -74,12 +74,32 @@ export class SideBarComponent extends Component {
     ]
   }
 
+  /**
+   * Basic check that some injection hasn't happened.
+   */
+  saneVal(val) {
+    return /[A-Za-z0-9_]/.test(val);
+  }
 
   /**
-   * Test whether the sidebar form elements are valid
+   * Validate a select input by testing that the input is not the default
+   * value and is a string matching my regex. This is in place of input
+   * sanitation, as injected values should just fail the test here and
+   * proceed along normal program flow.
+   */
+  selectIsValid(selectElement) {
+    const validations = [
+      select => select.selectedIndex !== 0,
+      select => this.saneVal(select.value)
+    ]
+    return validations.every(validator => validator(selectElement));
+  };
+
+
+  /**
+   * Test whether the sidebar form elements are valid.
    */
   validateSidebar() {
-    const selectIsValid = (selectElement) => { return selectElement.selectedIndex !== 0 };
     let isValid = true;
     const elements = [
       document.getElementById('dataSourceInput'),
@@ -87,7 +107,7 @@ export class SideBarComponent extends Component {
       document.getElementById('tickerInput'),
     ]
     elements.forEach(el => {
-      if ( !selectIsValid(el) ) {
+      if ( !this.selectIsValid(el) ) {
         isValid = false;
         el.classList.add('error');
       } else {
@@ -128,7 +148,11 @@ export class SideBarComponent extends Component {
     const exchangeInput = document.getElementById('exchangeInput');
     tickerInput.selectedIndex = "0";
     exchangeInput.selectedIndex = "0";
-    this.triggerCustomEvent("data-source-change", {dataSource: source});
+    if (this.saneVal(source)) {
+      this.triggerCustomEvent("data-source-change", {dataSource: source});
+    } else {
+      console.error('This data source value is invalid');
+    }
   }
 
   triggerDataChange(e) {
@@ -148,6 +172,10 @@ export class SideBarComponent extends Component {
     const tickerInput = document.getElementById('tickerInput');
     tickerInput.selectedIndex = "0";
     const ticker = e.target.value;
-    this.triggerCustomEvent("data-exchange-change", { exchange: exchange, dataSource: source.value});
+    if (this.saneVal(exchange) && this.saneVal(source.value)) {
+      this.triggerCustomEvent("data-exchange-change", { exchange: exchange, dataSource: source.value});
+    } else {
+      console.error('The value for either data source or exchange is invalid');
+    }
   }
 }

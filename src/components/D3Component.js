@@ -46,11 +46,12 @@ export class D3Component extends Component {
       }
       const source = data.dataSource;
       const [rawData, mapper] = dataSourceDispatch[source];
-      data.plotData = rawData.dataset.data.map(mapper);
-      this.clearPlot('#plot');
-      this.renderPlot(data.plotData, '#plot', data.title);
+      if (rawData) {
+        data.plotData = rawData.dataset.data.map(mapper);
+        this.clearPlot('#plot');
+        this.renderPlot(data.plotData, '#plot', data.title);
+      }
     }
-
   }
 
   renderPlot(data, plotElementId, title) {

@@ -219,6 +219,22 @@ export class CarouselComponent extends Component {
 }
 ```
 
+### External Libraries
+
+In addition to the component patter supplied, several third-party libraries are
+used in the app to make life better.
+
+* [GlideJs](https://glidejs.com/) is used to make the CarouselComponent
+* [axios](https://github.com/axios/axios) is used to call the data API's
+* [d3](https://d3js.org/) is used for the plotting in `D3Component`
+* [lit-html](https://github.com/Polymer/lit-html) is used for html templating in the `Component.render()` method
+* [unsplash-js](https://github.com/unsplash/unsplash-js) is used to call the unsplash.com API
+* [babel](https://babeljs.io/) is used to convert the way we write code the the way browsers want it
+* [sass](https://sass-lang.com/) is used for making css utility classes e.g. `p-0, p-1, p-2 ...`
+* [webpack](https://webpack.js.org/) is used to execute babel and sass, serve the dev environment and package the project
+* [chai](https://www.chaijs.com/) is used with [mocha](https://mochajs.org/) for unit testing
+
+
 ## What's up with the random image carousel?
 
 This was a class project for the excellent [AlbanyCanCode](https://albanycancode.org/)
