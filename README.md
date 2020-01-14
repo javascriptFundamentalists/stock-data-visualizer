@@ -32,13 +32,18 @@ To run the app locally:
 
 ```
 {
-  "QUANDL_API_KEY": "jsdkfsjl",
-  "US_FUNDAMENTALS_API_KEY": "jsdkfsjl",
-  "UNSPLASH_API_KEY": "s;dfjska;fjdkl;s",
+  "QUANDL_API_KEY": "<YOUR API KEY>",
+  "US_FUNDAMENTALS_API_KEY": "<YOUR API KEY>",
+  "UNSPLASH_API_KEY": "<YOUR API KEY>",
 }
 ```
 
 5. Launch the app `npm run start`
+
+## Running the Tests
+
+A modest number of unit tests can be executed by running the `npm run testAll` command.
+
 
 ## Technical Documentation
 
