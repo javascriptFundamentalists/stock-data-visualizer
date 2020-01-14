@@ -13,11 +13,7 @@ import { ThemeComponent } from "./components/ThemePicker";
 import { getRandomFinanceImages } from "./unsplash/unsplash";
 import { readBATSmetadata } from "./d3/csv";
 import { readCHRISmetadata } from "./d3/csv";
-<<<<<<< HEAD
-import { start } from "repl";
-=======
-import { getFundamentalsData } from "./usfundamentals/usfundamentals";
->>>>>>> bc6eb931b266c31c2631befb05dc9e58858f8131
+//import { start } from "repl";
 
 // available data sources
 const sources = [
@@ -75,7 +71,7 @@ function load (){
   start ();
 }
 
-function start (){
+function  start(){
   let totalitemwidth = 0
   for(let i=0;i <allbox.length;i++){
     //width and margin setup of images
