@@ -58,6 +58,7 @@ export class FundamentalsComponent extends Component {
   getShowIndicators (e) {
     const fundamentalsSelectEl = e.currentTarget;
     const cik = fundamentalsSelectEl.value;
+
     getFundamentalsData(cik).then(data => {
       const body = document.getElementById('fundamentalsTableBody');
       const nodata = document.getElementById('nofundamentals');

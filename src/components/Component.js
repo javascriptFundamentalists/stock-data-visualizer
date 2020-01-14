@@ -18,11 +18,28 @@ export class Component {
     this.attachMany(children);
   }
 
-  // fires after render in this.render
+  /**
+   * Executes before the render. This can be an alternative to inheritance
+   */
+  preMount() {}
+
+  /**
+   * Executes after the render.
+   */
   postMount() {}
 
-  // fires before render in constructor?
-  preMount() {}
+  /**
+   * Fill template and inject html into the DOM at the parentId node
+   */
+  render (data, parentId) {
+    if ( parentId ) {
+      const parent = document.getElementById(parentId);
+      render(this.template(data), parent);
+
+      this.children.forEach(child => child.render(data, child.parentId));
+      this.postMount()
+    }
+  }
 
   // TODO: method to destroy a Component gracefully
   destroy () {}
@@ -71,19 +88,6 @@ export class Component {
 
   // TODO: method to unbind events
   unregisterEvents () {}
-
-  /**
-   * Fill template and inject html into the DOM at the parentId node
-   */
-  render (data, parentId) {
-    if ( parentId ) {
-      const parent = document.getElementById(parentId);
-      render(this.template(data), parent);
-
-      this.children.forEach(child => child.render(data, child.parentId));
-      this.postMount()
-    }
-  }
 
   /**
    * Accessor method for this.store.update

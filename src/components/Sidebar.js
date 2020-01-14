@@ -1,6 +1,12 @@
 import { html } from "lit-html";
 import { Component } from "./Component";
 
+/**
+ * The sidebar is where the plot controls are located. It consists of
+ * a series of cascading dropdowns and a radio group for year selection.
+ * The controls at the top apply filters but won't call the API. The API is
+ * called upon selection of a symbol or changing the date range
+ */
 export class SideBarComponent extends Component {
   template(data) {
     return html`
@@ -65,28 +71,35 @@ export class SideBarComponent extends Component {
       {type: "change", selector: "#tickerInput", handler: this.triggerDataChange},
       {type: "change", selector: "#exchangeInput", handler: this.triggerDataExchangeChange},
       {type: "change", selector: "#dataSourceInput", handler: this.triggerDataSourceChange},
-    ];
+    ]
   }
 
+
+  /**
+   * Test whether the sidebar form elements are valid
+   */
   validateSidebar() {
-    const selectValid = (selectElement) => { return selectElement.selectedIndex !== 0 };
-    let valid = true;
+    const selectIsValid = (selectElement) => { return selectElement.selectedIndex !== 0 };
+    let isValid = true;
     const elements = [
       document.getElementById('dataSourceInput'),
       document.getElementById('exchangeInput'),
       document.getElementById('tickerInput'),
     ]
     elements.forEach(el => {
-      if ( !selectValid(el) ) {
-        valid = false;
+      if ( !selectIsValid(el) ) {
+        isValid = false;
         el.classList.add('error');
       } else {
         el.classList.remove('error');
       }
     });
-    return valid;
+    return isValid;
   }
 
+  /**
+   * Prepare the query by gathering the input values
+   */
   gatherQueryDetails() {
     const tickerSelect = document.getElementById('tickerInput');
     const details = {
@@ -101,6 +114,9 @@ export class SideBarComponent extends Component {
     return details;
   }
 
+  /**
+   * Show / hide the start date input
+   */
   toggleDateInput(e) {
     const dateInput = document.getElementById('startDateInputItem');
     dateInput.classList.toggle('invisible');
