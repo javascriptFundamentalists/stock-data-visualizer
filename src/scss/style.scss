@@ -2,10 +2,12 @@ $appbar-height: 18vh;
 $sidebar-width: 15vw;
 $color-alpha-primary: slategrey;
 $color-beta-primary: white;
+$color-alpha-blue: royalblue;
+$color-alpha-red: darkred;
+$color-alpha-pink: mediumvioletred;
 
 @import "../../node_modules/@glidejs/glide/src/assets/sass/glide.core";
 @import "../../node_modules/@glidejs/glide/src/assets/sass/glide.theme";
-@import "../../node_modules/animate.css/animate.css";
 
 html,
 body {
@@ -62,16 +64,32 @@ $paddings: (
   z-index: 2;
   padding-left: 0.8rem;
   box-shadow: 0px 2px 10px black;
-}
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 
-.appbar-primary {
-  background-color: $color-alpha-primary;
   color: $color-beta-primary;
   a {
     color: $color-beta-primary;
     font-size: 1.8rem;
     text-decoration: none;
   }
+}
+
+.appbar[data-theme=theme-primary] {
+  background-color: $color-alpha-primary;
+}
+
+.appbar[data-theme=theme-blue] {
+  background-color: $color-alpha-blue;
+}
+
+.appbar[data-theme=theme-red] {
+  background-color: $color-alpha-red;
+}
+
+.appbar[data-theme=theme-pink] {
+  background-color: $color-alpha-pink;
 }
 
 .sidebar {
@@ -82,20 +100,33 @@ $paddings: (
   height: 100vh;
   margin-top: $appbar-height;
 
-  ul {
-    padding-left: 0;
-    text-align: left;
-  }
-}
-
-.sidebar-primary {
-  background-color: $color-alpha-primary;
   color: $color-beta-primary;
   a {
     color: $color-beta-primary;
     font-size: 1.5rem;
     text-decoration: none;
   }
+
+  ul {
+    padding-left: 0;
+    text-align: left;
+  }
+}
+
+.sidebar[data-theme=theme-primary] {
+  background-color: $color-alpha-primary;
+}
+
+.sidebar[data-theme=theme-blue] {
+  background-color: $color-alpha-blue;
+}
+
+.sidebar[data-theme=theme-red] {
+  background-color: $color-alpha-red;
+}
+
+.sidebar[data-theme=theme-pink] {
+  background-color: $color-alpha-pink;
 }
 
 .content {
@@ -236,8 +267,23 @@ item{
 }
 
 // slide in fundamentals panel
-.fundamentals {
+.fundamentals[data-theme=theme-primary] {
   background-color: $color-alpha-primary;
+}
+
+.fundamentals[data-theme=theme-blue] {
+  background-color: $color-alpha-blue;
+}
+
+.fundamentals[data-theme=theme-red] {
+  background-color: $color-alpha-red;
+}
+
+.fundamentals[data-theme=theme-pink] {
+  background-color: $color-alpha-pink;
+}
+
+.fundamentals {
   border: 1px solid black;
   border-top-left-radius: 6px;
   border-bottom-left-radius: 6px;
@@ -382,4 +428,12 @@ item{
 .error {
   border: 2px solid red;
   transition: all 100ms linear;
+}
+
+.menu {
+  margin-right: 3rem;
+  .themePicker {
+    border: 1px solid;
+    padding: 1rem;
+  }
 }

@@ -58,6 +58,13 @@ export class FundamentalsComponent extends Component {
   getShowIndicators (e) {
     const fundamentalsSelectEl = e.currentTarget;
     const cik = fundamentalsSelectEl.value;
+
+    // sanity check
+    if ( !/[A-Za-z0-9_]/.test(cik) ) {
+      fundamentalsSelectEl.classList.add('error');
+      return
+    }
+
     getFundamentalsData(cik).then(data => {
       const body = document.getElementById('fundamentalsTableBody');
       const nodata = document.getElementById('nofundamentals');
@@ -71,8 +78,7 @@ export class FundamentalsComponent extends Component {
       // add new
       // remove header row
       const [ ,...lines] = data.data.split('\n');
-      console.log(lines);
-      if ( !lines ) {
+      if ( lines.length == 1 ) {
         nodata.classList.remove('hidden');
       }
       lines.forEach(line => {

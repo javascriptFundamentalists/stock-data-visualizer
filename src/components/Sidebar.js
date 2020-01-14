@@ -1,6 +1,12 @@
 import { html } from "lit-html";
 import { Component } from "./Component";
 
+/**
+ * The sidebar is where the plot controls are located. It consists of
+ * a series of cascading dropdowns and a radio group for year selection.
+ * The controls at the top apply filters but won't call the API. The API is
+ * called upon selection of a symbol or changing the date range
+ */
 export class SideBarComponent extends Component {
   template(data) {
     return html`
@@ -65,30 +71,59 @@ export class SideBarComponent extends Component {
       {type: "change", selector: "#tickerInput", handler: this.triggerDataChange},
       {type: "change", selector: "#exchangeInput", handler: this.triggerDataExchangeChange},
       {type: "change", selector: "#dataSourceInput", handler: this.triggerDataSourceChange},
-    ];
+    ]
   }
 
+  /**
+   * Basic check that some injection hasn't happened.
+   */
+  saneVal(val) {
+    return /[A-Za-z0-9_]/.test(val);
+  }
+
+  /**
+   * Validate a select input by testing that the input is not the default
+   * value and is a string matching my regex. This is in place of input
+   * sanitation, as injected values should just fail the test here and
+   * proceed along normal program flow.
+   */
+  selectIsValid(selectElement) {
+    const validations = [
+      select => select.selectedIndex !== 0,
+      select => this.saneVal(select.value)
+    ]
+    return validations.every(validator => validator(selectElement));
+  };
+
+
+  /**
+   * Test whether the sidebar form elements are valid.
+   */
   validateSidebar() {
-    const selectValid = (selectElement) => { return selectElement.selectedIndex !== 0 };
-    let valid = true;
+    let isValid = true;
     const elements = [
       document.getElementById('dataSourceInput'),
       document.getElementById('exchangeInput'),
       document.getElementById('tickerInput'),
     ]
     elements.forEach(el => {
-      if ( !selectValid(el) ) {
-        valid = false;
+      if ( !this.selectIsValid(el) ) {
+        isValid = false;
         el.classList.add('error');
       } else {
         el.classList.remove('error');
       }
     });
-    return valid;
+    return isValid;
   }
 
+  /**
+   * Prepare the query by gathering the input values
+   */
   gatherQueryDetails() {
+    const tickerSelect = document.getElementById('tickerInput');
     const details = {
+      title: tickerSelect.options[tickerSelect.selectedIndex].textContent,
       tickerSymbol: document.getElementById('tickerInput').value,
       exchange: document.getElementById('exchangeInput').value,
       dataSource: document.getElementById('dataSourceInput').value,
@@ -99,6 +134,9 @@ export class SideBarComponent extends Component {
     return details;
   }
 
+  /**
+   * Show / hide the start date input
+   */
   toggleDateInput(e) {
     const dateInput = document.getElementById('startDateInputItem');
     dateInput.classList.toggle('invisible');
@@ -110,7 +148,11 @@ export class SideBarComponent extends Component {
     const exchangeInput = document.getElementById('exchangeInput');
     tickerInput.selectedIndex = "0";
     exchangeInput.selectedIndex = "0";
-    this.triggerCustomEvent("data-source-change", {dataSource: source});
+    if (this.saneVal(source)) {
+      this.triggerCustomEvent("data-source-change", {dataSource: source});
+    } else {
+      console.error('This data source value is invalid');
+    }
   }
 
   triggerDataChange(e) {
@@ -130,6 +172,10 @@ export class SideBarComponent extends Component {
     const tickerInput = document.getElementById('tickerInput');
     tickerInput.selectedIndex = "0";
     const ticker = e.target.value;
-    this.triggerCustomEvent("data-exchange-change", { exchange: exchange, dataSource: source.value});
+    if (this.saneVal(exchange) && this.saneVal(source.value)) {
+      this.triggerCustomEvent("data-exchange-change", { exchange: exchange, dataSource: source.value});
+    } else {
+      console.error('The value for either data source or exchange is invalid');
+    }
   }
 }
