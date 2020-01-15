@@ -18,6 +18,21 @@ export class AppComponent extends Component {
             Stock Visuals
           </span>
         </div>
+        <!-- Sign up Form -->
+        <div class="mobile-center wrapper white-text padding-one">
+        <form id="signup" class="two-four-column" action="index.html" method="post">
+            <p class="padding-one black-text">Subscribe to our Newsletter!</p>
+            <input type="text" name="name" value="" placeholder="Name">
+            <input type="text" name="email" value="" placeholder="Email Address">
+            <input type="submit" name="submit" value="Subscribe!">
+        </form></div>
+        <div class="white-text center-text padding-one">
+        <div class = "socialmedia">
+        <i href="#" class="fab fa-facebook"></i>
+        <i href="#" class="fab fa-instagram"></i>
+        <i href="#" class="fab fa-twitter"></i>
+        </div>
+    </div>
         <div class="menu">
           <div id="themePicker" class="themePicker" />
         </div>

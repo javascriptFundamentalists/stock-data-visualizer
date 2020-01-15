@@ -24,7 +24,6 @@ export class D3Component extends Component {
   template(data) {
     return html`
       <div id="plot" class="plot">
-       <img src="bullbear.png" alt="stock default image" />
       </div>
     `;
   }

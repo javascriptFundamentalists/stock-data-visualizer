@@ -135,7 +135,7 @@ $paddings: (
   left: 0;
   margin-top: $appbar-height;
   margin-left: $sidebar-width;
-  height: 100vh - $appbar-height;
+  height: 85vh - $appbar-height;
   width: 100vw - $sidebar-width;
 }
 
@@ -190,60 +190,7 @@ item{
   height:250px;
   margin:30px;}
   
-  
-  .thumbnail-slider{
-    width : 100%;
-    float : left;
-    overflow : hidden;
-  }
-  
-  .thumbnail-slider .thumbnail-container {
-    width :100%;
-    float : left;
-    transition: margin 1s ease;
-  }
-  
-  .thumbnail-slider .item {
-    width:200px;
-    background-color: gray;
-    line-height: 250px;
-    text-align: center;
-    font-size: 50px;
-    color: #ffffff;
-    float: left;
-    margin :33px;
-    
-  }
-  
-  .thumbnail-slider .controls{
-    width: 100%;
-    float: left;
-    padding: 15px;
-  }
-  
-  .thumbnail-slider .controls ul{
-    display: block;
-    text-align: center;
-    padding:0;
-    margin: 0;
-    list-style: none;
-  }
-  
-  .thumbnail-slider .controls ul li {
-    height:  35px;
-    width: 35px;
-    border: 1px solid #c3c3c3;
-    margin:  4px;
-    display: inline-block;
-    line-height: 33px;
-    cursor: pointer;
-  
-  }
-  
-  .thumbnail-slider .controls ul li .active{
-    background-color: green;
-    color: #ffffff;
-  }
+
 
 // Image styles
 .logo {
@@ -437,13 +384,16 @@ item{
     padding: 1rem;
   }
 }
+
 /* Form 1 (two fields) */
 #signup input[type="text"]{
-  width:100%;
+  width:170px;
+  height:1rem;
   display:block;
   float:left;
-  margin: 0 5px 10px 0;
-  color:#333;
+  background-color: slategray;
+  margin: 1120px 5px 10px 0;
+  color: black;
   -webkit-appearance:none;
   -moz-appearance:none;
   -ms-appearance:none;
@@ -453,18 +403,20 @@ item{
   -webkit-border-radius:4px;
   -moz-border-radius:4px;
   border-radius:4px;
-  font-size:16px;
-  padding:14px 22px;
+  font-size:15px;
+  padding:0;
   transition: all 250ms ease-in;
 }
+
 /* Submit button */
 #signup input[type="submit"]{
-  width:auto;
+  width:150px;
+  height: 1rem;
   background:#244afb;
   color:#fff;
   display:block;
   float:right;
-  margin: 0 0 5px 0;
+  margin: 1120px 0 5px 0;
   -webkit-appearance:none;
   -moz-appearance:none;
   -ms-appearance:none;
@@ -474,11 +426,15 @@ item{
   -webkit-border-radius:4px;
   -moz-border-radius:4px;
   border-radius:4px;
-  font-size:16px;
-  padding:14px 22px;
+  font-size:15px;
+  padding:0;
   transition: all 250ms ease-in;
 }
 #signup input[type="submit"]:hover{
   cursor:pointer;
   background:#444;
+}
+.socialmedia{
+  font-size: 25px;
+  margin: 0px 0px 70px 0px;
 }
