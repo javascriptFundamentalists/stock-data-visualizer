@@ -221,7 +221,7 @@ export class CarouselComponent extends Component {
 
 ### External Libraries
 
-In addition to the component patter supplied, several third-party libraries are
+In addition to the component pattern supplied, several third-party libraries are
 used in the app to make life better.
 
 * [GlideJs](https://glidejs.com/) is used to make the CarouselComponent
