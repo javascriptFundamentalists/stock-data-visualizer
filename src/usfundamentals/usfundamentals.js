@@ -18,6 +18,7 @@ export const getCompaniesData = () => {
  * @param cik (str) The identifier for the stock
  */
 export const getFundamentalsData = (cik) => {
-  const promise = axios.get(PROXY + `https://api.usfundamentals.com/v1/indicators/xbrl?companies=${cik}&indicators=Assets,AssetsCurrent,Liabilities,LiabilitiesCurrent&periods=2018&token=${API_KEY}`);
+  const indicators = 'Assets,AssetsCurrent,Liabilities,LiabilitiesCurrent,CashAndCashEquivalentsAtCarryingValue,OperatingIncomeLoss,Revenues';
+  const promise = axios.get(PROXY + `https://api.usfundamentals.com/v1/indicators/xbrl?companies=${cik}&indicators=${indicators}&periods=2018&token=${API_KEY}`);
   return promise;
 }

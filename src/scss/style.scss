@@ -1,5 +1,6 @@
 $appbar-height: 18vh;
 $sidebar-width: 15vw;
+$sidebar-font-size: 1rem;
 $color-alpha-primary: slategrey;
 $color-beta-primary: white;
 $color-alpha-blue: royalblue;
@@ -99,6 +100,7 @@ $paddings: (
   width: $sidebar-width;
   height: 100vh;
   margin-top: $appbar-height;
+  font-size: $sidebar-font-size;
 
   color: $color-beta-primary;
   a {
@@ -110,6 +112,19 @@ $paddings: (
   ul {
     padding-left: 0;
     text-align: left;
+  }
+
+  label {
+    font-size: $sidebar-font-size;
+  }
+
+  select {
+    width: 90%;
+    font-size: $sidebar-font-size;
+  }
+
+  input {
+    font-size: $sidebar-font-size;
   }
 }
 
@@ -204,7 +219,7 @@ div.tooltip {
 
 .carousel {
   margin-top: 4rem;
-  margin-left: 5px;
+  margin-left: 2.75rem;
 }
 
 // slide in fundamentals panel
@@ -249,6 +264,7 @@ div.tooltip {
   }
   .fundamentalsFormContainer {
     width: 64%;
+    opacity: 0;
     float: right;
     margin-right: 5%;
 
@@ -262,6 +278,7 @@ div.tooltip {
 
       td {
         border: 1px solid black;
+        font-size: 17px;
       }
     }
 
@@ -270,6 +287,10 @@ div.tooltip {
 }
 
 .fundamentals.in {
+  .fundamentalsFormContainer {
+    width: 85%;
+    opacity: 1;
+  }
   right: 0;
   transition: right 500ms linear;
 }

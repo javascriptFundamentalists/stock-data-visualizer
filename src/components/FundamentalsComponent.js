@@ -7,7 +7,10 @@ export class FundamentalsComponent extends Component {
     getCompaniesData().then(data => { 
       const fundamentalsForm = document.getElementById('fundamentalsForm');
       const spinner = document.querySelector('.lds-spinner');
-      data.data.forEach(companyOption => {
+
+      // TODO: swap this for autocompleter or cascading dropdown
+      const sampleData = data.data.filter((x, i) => { return i < 300 })
+      sampleData.forEach(companyOption => {
         const option = document.createElement('option');
         option.textContent = companyOption.name_latest;
         option.value = companyOption.company_id;
