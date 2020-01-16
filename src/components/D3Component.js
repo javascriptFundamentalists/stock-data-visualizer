@@ -59,8 +59,8 @@ export class D3Component extends Component {
 
     // Set the dimensions of the canvas / graph
     let margin = { top: 30, right: 30, bottom: 30, left: 60 },
-      width = 800 - margin.left - margin.right,
-      height = 500 - margin.top - margin.bottom;
+      width = 1000 - margin.left - margin.right,
+      height = 700 - margin.top - margin.bottom;
 
     // Set the ranges
     let x = d3.scaleTime().range([0, width]);
@@ -100,7 +100,7 @@ export class D3Component extends Component {
             .attr("x", (width / 2))             
             .attr("y", 0 - (margin.top / 2))
             .attr("text-anchor", "middle")  
-            .style("font-size", "16px") 
+            .style("font-size", "20px") 
             .style("text-decoration", "underline")  
             .text(title);
 
