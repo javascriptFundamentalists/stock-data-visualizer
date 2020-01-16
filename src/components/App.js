@@ -18,27 +18,31 @@ export class AppComponent extends Component {
             Stock Visuals
           </span>
         </div>
-        <!-- Sign up Form -->
-        <div class="mobile-center wrapper white-text padding-one">
-        <form id="signup" class="two-four-column" action="index.html" method="post">
-            <p class="padding-one black-text">Subscribe to our Newsletter!</p>
-            <input type="text" name="name" value="" placeholder="Name">
-            <input type="text" name="email" value="" placeholder="Email Address">
-            <input type="submit" name="submit" value="Subscribe!">
-        </form></div>
-        <div class="white-text center-text padding-one">
-        <div class = "socialmedia">
-        <i href="#" class="fab fa-facebook"></i>
-        <i href="#" class="fab fa-instagram"></i>
-        <i href="#" class="fab fa-twitter"></i>
-        </div>
-    </div>
         <div class="menu">
+          <div id="socialmedia-container" class="socialmedia-container">
+            <div id="socialmedia" class="socialmedia">
+              <i href="#" class="fab fa-facebook"></i>
+              <i href="#" class="fab fa-instagram"></i>
+              <i href="#" class="fab fa-twitter"></i>
+            </div>
+          </div>
           <div id="themePicker" class="themePicker" />
         </div>
       </nav>
       <div id="sidebar" class="sidebar" data-theme="theme-primary"></div>
       <div id="content" class="content" data-theme="theme-primary"></div>
+      <!-- Sign up Form -->
+      <div id="signup-container" class="signup-container">
+        <form id="signup" class="signup-form">
+            <p class="subscribe-msg">Subscribe to our Newsletter!</p>
+            <input id="signup-name" type="text" name="name" value="" placeholder="Name">
+            <input id="signup-email" type="text" name="email" value="" placeholder="Email Address">
+            <button id="signup-submit" type="button" class="signup-button"
+              data-theme="theme-primary">
+              Subscribe!
+            </button>
+        </form>
+      </div>
       <div id="fundamentalsPanel" class="fundamentals" data-theme="theme-primary"></div>
     `;
   }

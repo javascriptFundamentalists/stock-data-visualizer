@@ -26,9 +26,6 @@ const sources = [
   const imageUrlPromise = await getRandomFinanceImages(5);
   const imageData = await imageUrlPromise.json();
   const carouselUrls = imageData.results.map(x => { return x.urls.thumb });
- // carouselUrls.push('img6.jpg');
- // ['img1.jpg', 'img2.jpg', ...] .forEach(url => carouselUrls.push('url'))
-
 
   const seedData = { 
     tickers: codes,

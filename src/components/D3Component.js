@@ -24,6 +24,7 @@ export class D3Component extends Component {
   template(data) {
     return html`
       <div id="plot" class="plot">
+        <img src="bullbear.png" alt="splash" />
       </div>
     `;
   }
@@ -57,7 +58,7 @@ export class D3Component extends Component {
     let csvdata = data;
 
     // Set the dimensions of the canvas / graph
-    let margin = { top: 30, right: 30, bottom: 30, left: 60 },
+    let margin = { top: 30, right: 30, bottom: 120, left: 60 },
       width = 1000 - margin.left - margin.right,
       height = 700 - margin.top - margin.bottom;
 
@@ -134,13 +135,18 @@ export class D3Component extends Component {
       .append("g")
       .attr("class", "x axis")
       .attr("transform", "translate(0," + height + ")")
-      .call(xAxis);
+      .call(xAxis)
+      .selectAll("text")
+      .attr("transform", "rotate(45)")
+      .style("font-size", 20)
+      .style("text-anchor", "start");
 
     // Add the Y Axis
     svg
       .append("g")
       .attr("class", "y axis")
-      .call(yAxis);
+      .call(yAxis)
+      .style("font-size", 20);
 
     // Add the scatterplot
     svg.selectAll("dot")    

@@ -209,7 +209,7 @@ item{
 
 // Image styles
 .logo {
-  font-size: 20px;
+  font-size: 40px;
   padding-left: 0;
   padding-top: 2.2rem;
 
@@ -281,9 +281,13 @@ item{
     .fundamentalsTable {
       margin-top: 16px;
       border-collapse: collapse;
+      
+      thead {
+        font-size: $sidebar-font-size;
+      }
 
       td {
-        border: 1px solid black;
+        border: 1px solid $color-beta-primary;
         font-size: 17px;
       }
     }
@@ -406,56 +410,79 @@ item{
   }
 }
 
-/* Form 1 (two fields) */
-#signup input[type="text"]{
-  width:170px;
-  height:1rem;
-  display:block;
-  float:left;
-  background-color: slategray;
-  margin: 1120px 5px 10px 0;
-  color: black;
-  -webkit-appearance:none;
-  -moz-appearance:none;
-  -ms-appearance:none;
-  -o-appearance:none;
-  appearance:none;
-  border:none;
-  -webkit-border-radius:4px;
-  -moz-border-radius:4px;
-  border-radius:4px;
-  font-size:15px;
-  padding:0;
-  transition: all 250ms ease-in;
+// signup form stylings
+.signup-container {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  margin-right: 1rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  .signup-form {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+
+  input, p {
+    font-size: 0.8rem;
+    margin-right: 1rem;
+  }
+
+  .signup-button {
+    padding: 0.25rem;
+    border-radius: 5px;
+    border: 2px solid;
+  }
+
+  .signup-button[data-theme=theme-primary] {
+    background-color: $color-alpha-primary;
+    color: $color-beta-primary;
+    &:hover {
+      background-color: $color-beta-primary;
+      color: $color-alpha-primary;
+    }
+  }
+
+  .signup-button[data-theme=theme-blue] {
+    background-color: $color-alpha-blue;
+    color: $color-beta-primary;
+    &:hover {
+      background-color: $color-beta-primary;
+      color: $color-alpha-blue;
+    }
+  }
+
+  .signup-button[data-theme=theme-red] {
+    background-color: $color-alpha-red;
+    color: $color-beta-primary;
+    &:hover {
+      background-color: $color-beta-primary;
+      color: $color-alpha-red;
+    }
+  }
+
+  .signup-button[data-theme=theme-pink] {
+    background-color: $color-alpha-pink;
+    color: $color-beta-primary;
+    &:hover {
+      background-color: $color-beta-primary;
+      color: $color-alpha-pink;
+    }
+  }
+
 }
 
-/* Submit button */
-#signup input[type="submit"]{
-  width:150px;
-  height: 1rem;
-  background:#244afb;
-  color:#fff;
-  display:block;
-  float:right;
-  margin: 1120px 0 5px 0;
-  -webkit-appearance:none;
-  -moz-appearance:none;
-  -ms-appearance:none;
-  -o-appearance:none;
-  appearance:none;
-  border:none;
-  -webkit-border-radius:4px;
-  -moz-border-radius:4px;
-  border-radius:4px;
-  font-size:15px;
-  padding:0;
-  transition: all 250ms ease-in;
+// social media stylings
+.socialmedia-container {
+  .socialmedia{
+    font-size: 2rem;
+    text-align: right;
+    margin-bottom: 2rem;
+  }
 }
-#signup input[type="submit"]:hover{
-  cursor:pointer;
-  background:#444;
-}
-.socialmedia{
-  font-size: 25px;
-  margin: 0px 0px 70px 0px;
-}
+
